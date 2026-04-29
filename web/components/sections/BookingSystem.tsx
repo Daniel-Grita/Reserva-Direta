@@ -16,14 +16,14 @@ function StatTile({ stat, run, index }: { stat: TrustBadge; run: boolean; index:
   const override = 'displayOverride' in stat ? stat.displayOverride : undefined;
   const display = settled ? (override ?? `${prefix}${stat.target}${suffix}`) : `${prefix}${value}${suffix}`;
   return (
-    <div className="group text-center">
+    <div className="group text-left">
       <div className="relative inline-block mb-2">
         <div className="text-display-md font-display text-navy leading-none tabular-nums">
           {display}
         </div>
         <span
           aria-hidden
-          className="absolute left-1/2 -bottom-1.5 h-[3px] w-10 -translate-x-1/2 origin-center scale-x-0 rounded-full bg-orange transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
+          className="absolute left-0 -bottom-1.5 h-[3px] w-10 origin-left scale-x-0 rounded-full bg-orange transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
         />
       </div>
       <p className="text-body-sm font-body text-n-600">{keepLastTwoTogether(stat.label)}</p>
@@ -38,12 +38,12 @@ export default function BookingSystem() {
     <section ref={ref} data-reveal={inView} className="bg-light-blue py-section-y">
       <div className="section-container">
         <div className="reveal-stagger">
-          <div className="max-w-3xl mb-10">
+          <div className="mb-10">
             <div className="text-label font-body uppercase tracking-label text-orange mb-4">
               {bookingSystem.label}
             </div>
             <h2 className="text-display-md lg:text-display-lg font-display text-navy mb-6">
-              {bookingSystem.heading}
+              {bookingSystem.heading[0]}<br />{bookingSystem.heading[1]}
             </h2>
             <p className="text-body-base font-body text-n-600">
               {withHighlight(bookingSystem.intro, 'sem intermediários')}
@@ -52,7 +52,7 @@ export default function BookingSystem() {
 
           <BookingWidgetMockup />
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10 p-8 bg-white rounded-card-lg border border-n-200">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10 p-8 bg-white rounded-card-lg">
             {bookingSystem.trustBadges.map((badge, i) => (
               <StatTile key={i} stat={badge} run={inView} index={i} />
             ))}

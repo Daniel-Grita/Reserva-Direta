@@ -31,7 +31,7 @@ export const problem = {
 
 export const bookingSystem = {
   label: "SISTEMA DE RESERVAS",
-  heading: "O seu próprio motor de reservas. Apenas 5% por reserva.",
+  heading: ["O seu próprio motor de reservas.", "Apenas 5% por reserva."],
   intro:
     "Integramos o CultBooking, um motor de reservas profissional e otimizado para conversões, diretamente no seu website. Os seus hóspedes reservam sem sair do seu site, sem intermediários, e você mantém o controlo total.",
   trustBadges: [
