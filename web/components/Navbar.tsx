@@ -6,9 +6,15 @@ import { navItems } from '@/lib/constants';
 import { useActiveSection } from '@/lib/useActiveSection';
 import { LinkButton } from './ui/Button';
 
+function getAnchorId(href: string): string | null {
+  if (href.startsWith('#')) return href.slice(1);
+  if (href.startsWith('/#')) return href.slice(2);
+  return null;
+}
+
 export default function Navbar() {
   const sectionIds = navItems
-    .map((item) => (item.href.startsWith('#') ? item.href.slice(1) : null))
+    .map((item) => getAnchorId(item.href))
     .filter((id): id is string => id !== null);
   const active = useActiveSection(sectionIds);
 
@@ -28,7 +34,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex gap-8">
           {navItems.map((item) => {
-            const id = item.href.startsWith('#') ? item.href.slice(1) : null;
+            const id = getAnchorId(item.href);
             const isActive = id !== null && id === active;
             return (
               <Link

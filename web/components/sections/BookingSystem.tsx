@@ -3,33 +3,8 @@
 import { bookingSystem } from '@/lib/constants';
 import { LinkButton } from '../ui/Button';
 import { useInView } from '@/lib/useInView';
-import { withHighlight, keepLastTwoTogether } from '@/lib/highlight';
-import { useCountUp } from '@/lib/useCountUp';
-
-type TrustBadge = (typeof bookingSystem.trustBadges)[number];
-
-function StatTile({ stat, run, index }: { stat: TrustBadge; run: boolean; index: number }) {
-  const value = useCountUp(stat.target, run, { duration: 1100, startDelay: 700 + index * 140 });
-  const settled = value >= stat.target;
-  const prefix = ('prefix' in stat && stat.prefix) || '';
-  const suffix = ('suffix' in stat && stat.suffix) || '';
-  const override = 'displayOverride' in stat ? stat.displayOverride : undefined;
-  const display = settled ? (override ?? `${prefix}${stat.target}${suffix}`) : `${prefix}${value}${suffix}`;
-  return (
-    <div className="group text-left">
-      <div className="relative inline-block mb-2">
-        <div className="text-display-md font-display text-navy leading-none tabular-nums">
-          {display}
-        </div>
-        <span
-          aria-hidden
-          className="absolute left-0 -bottom-1.5 h-[3px] w-10 origin-left scale-x-0 rounded-full bg-orange transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
-        />
-      </div>
-      <p className="text-body-sm font-body text-n-600">{keepLastTwoTogether(stat.label)}</p>
-    </div>
-  );
-}
+import { withHighlight } from '@/lib/highlight';
+import StatTile from '../ui/StatTile';
 
 export default function BookingSystem() {
   const [ref, inView] = useInView<HTMLElement>();

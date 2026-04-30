@@ -1,8 +1,91 @@
 export const navItems = [
-  { label: "Quem Somos", href: "#quem-somos" },
-  { label: "Serviços", href: "#servicos" },
-  { label: "Blog", href: "#blog" },
+  { label: "Quem Somos", href: "/quem-somos" },
+  { label: "A Nossa Solução", href: "/a-nossa-solucao" },
+  { label: "Serviços", href: "/servicos" },
+  { label: "Blog", href: "/#blog" },
 ];
+
+export const solucaoPage = {
+  hero: {
+    heading: "O seu próprio motor de reservas",
+    image: { src: "https://picsum.photos/seed/rd-booking-engine/1200/600", alt: "Motor de reservas Reserva Direta" },
+    tagline: "Apenas 5% por reserva",
+    intro:
+      "Integramos o CultBooking, um motor de reservas profissional e otimizado para conversões, diretamente no seu website. Os seus hóspedes reservam sem sair do seu site, sem intermediários.",
+  },
+  steps: {
+    label: "COMO FUNCIONA",
+    heading: "4 passos para as suas reservas diretas",
+  },
+  features: {
+    label: "FUNCIONALIDADES",
+    icons: ["palette", "monitor", "lock", "calendar", "star", "trendingUp"] as const,
+  },
+  trust: {
+    label: "TECNOLOGIA DE CONFIANÇA",
+    heading: "CultBooking: Parceiro de empresas hoteleiras desde 2000",
+    bullets: [
+      "Booking.com Premier Connectivity Partner (2019, 2020, 2021)",
+      "Cloud-based, sem instalação",
+      "Aumento médio de 52% em reservas diretas (utilizadores piloto)",
+      "Account manager dedicado incluído",
+      "Expedia Preferred Partner (2021)",
+      "Ligada a 450+ canais de distribuição",
+    ],
+  },
+  primaryCta: { label: "Falar connosco sobre reservas diretas", href: "#contacto" },
+};
+
+export const aboutPage = {
+  hero: {
+    label: "NOSSA HISTÓRIA",
+    heading: "Como Começámos",
+    paragraphs: [
+      "João e Sebastião começaram a Reserva Direta porque viram o mesmo problema repetir-se: pequenos alojamentos, pensões e hotéis boutique pagando 15 a 25% de comissão em cada reserva para Booking.com e Airbnb, com pouco controlo sobre a experiência do hóspede.",
+      "Percebemos que havia uma forma melhor: combinar design, tecnologia e marketing para ajudar estas propriedades a ganhar independência das OTAs, a manter mais margem em cada reserva e a ter uma relação direta com os seus hóspedes.",
+    ],
+    image: { src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80", alt: "Receção de hotel boutique" },
+  },
+  team: {
+    label: "A EQUIPA",
+    heading: "Conhece quem está por trás da Reserva Direta",
+    members: [
+      {
+        name: "João Brazão",
+        role: "Fundador & Estratégia",
+        bio: "João traz 15+ anos de experiência em marketing digital e estratégia para o setor hoteleiro. Apaixonado por ajudar pequenos negócios a crescer de forma sustentável.",
+        photo: { src: "/team/joao.png", alt: "João Brazão" },
+      },
+      {
+        name: "Sebastião Gomes",
+        role: "Fundador & Desenvolvimento",
+        bio: "Sebastião é desenvolvedor full-stack com especialidade em tecnologia hoteleira. Garante que cada projeto é executado com perfeição técnica e atenção ao detalhe.",
+        photo: { src: "/team/sebastiao.png", alt: "Sebastião Gomes" },
+      },
+    ],
+  },
+  values: {
+    label: "VALORES",
+    heading: "O que nos guia",
+    items: [
+      {
+        icon: "eye",
+        title: "Transparência",
+        description: "Comunicação clara, sem jargão técnico. Sabemos que não somos todos especialistas em marketing ou tecnologia.",
+      },
+      {
+        icon: "trendingUp",
+        title: "Resultados",
+        description: "Focamos em métricas concretas: mais reservas, menos comissões, ROI claro. Não prometemos milagres, entregamos impacto.",
+      },
+      {
+        icon: "handshake",
+        title: "Parceria",
+        description: "Você não é um ticket de suporte. Trabalhamos contigo, entendemos o teu negócio e crescemos juntos.",
+      },
+    ],
+  },
+};
 
 export const hero = {
   heading: "Aumente as suas reservas diretas. Reduza comissões.",
@@ -38,7 +121,7 @@ export const bookingSystem = {
     { target: 450, suffix: "+", label: "Canais de distribuição conectados" },
     { target: 52, prefix: "+", suffix: "%", label: "Aumento médio em reservas diretas" },
     { target: 5, suffix: "%", label: "Comissão por reserva (sem mensalidade)" },
-    { target: 2, displayOverride: "1-2", label: "Semanas até ficar operacional" },
+    { target: 2, displayOverride: "1-2", label: "Semanas até ficar\noperacional" },
   ],
   process: {
     heading: "Como funciona",
@@ -118,7 +201,7 @@ export const bookingSystem = {
 
 export const services = {
   label: "SERVIÇOS MODULARES",
-  heading: "Tudo o que precisa para crescer online",
+  heading: "Tudo o que precisa para crescer online",
   intro:
     "Cada serviço funciona de forma independente, ou em conjunto para resultados máximos. Escolha o que faz sentido para o seu alojamento.",
   cards: [
@@ -156,6 +239,53 @@ export const services = {
       description:
         "Ajudamos a conhecer melhor os seus hóspedes e a criar estratégias de fidelização que transformam estadias únicas em clientes que voltam ano após ano.",
       cta: "",
+    },
+  ],
+};
+
+export const servicesPage = {
+  hero: {
+    eyebrow: "Tudo o que precisa para crescer online",
+    heading: "Os Serviços da Reserva Direta",
+    intro:
+      "Cada serviço funciona de forma independente, ou em conjunto para resultados máximos. Escolha o que faz sentido para o seu alojamento.",
+  },
+  label: "SERVIÇOS MODULARES",
+  cards: [
+    {
+      slug: "branding",
+      title: "Design Gráfico & Branding",
+      description:
+        "Criamos ou revitalizamos a identidade visual do seu alojamento, desde o logo até aos materiais de comunicação, para que se destaque no mercado.",
+      image: { src: "https://picsum.photos/seed/rd-branding/600/360", alt: "Identidade visual e branding" },
+    },
+    {
+      slug: "website",
+      title: "Website Profissional",
+      description:
+        "Website rápido, otimizado para conversões e pensado para receber reservas diretas. Fica com a propriedade completa do código, domínio e hosting.",
+      image: { src: "https://picsum.photos/seed/rd-website/600/360", alt: "Website profissional" },
+    },
+    {
+      slug: "marketing-digital",
+      title: "Marketing Digital",
+      description:
+        "Gestão de redes sociais, otimização de perfis nas OTAs e criação de conteúdo estratégico para atrair mais viajantes e converter.",
+      image: { src: "https://picsum.photos/seed/rd-marketing/600/360", alt: "Marketing digital" },
+    },
+    {
+      slug: "tecnologia",
+      title: "Tecnologia para Reservas",
+      description:
+        "Motor de reservas CultBooking, Google Hotel Ads e Channel Manager. A stack completa para maximizar reservas diretas.",
+      image: { src: "https://picsum.photos/seed/rd-tecnologia/600/360", alt: "Tecnologia para reservas" },
+    },
+    {
+      slug: "fidelizacao",
+      title: "Consultoria e Fidelização",
+      description:
+        "Ajudamos a conhecer melhor os seus hóspedes e a criar estratégias de fidelização que transformam estadias únicas em clientes recorrentes.",
+      image: { src: "https://picsum.photos/seed/rd-fidelizacao/600/360", alt: "Consultoria e fidelização" },
     },
   ],
 };
@@ -305,9 +435,9 @@ export const footer = {
     {
       title: "Navegação",
       links: [
-        { label: "Quem Somos", href: "#" },
-        { label: "Serviços", href: "#servicos" },
-        { label: "Blog", href: "#blog" },
+        { label: "Quem Somos", href: "/quem-somos" },
+        { label: "Serviços", href: "/servicos" },
+        { label: "Blog", href: "/#blog" },
         { label: "Contacto", href: "#contacto" },
       ],
     },

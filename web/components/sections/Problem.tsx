@@ -36,7 +36,7 @@ export default function Problem() {
           </div>
         </div>
 
-        <div className="reveal-stagger">
+        <div className="reveal-stagger flex flex-col gap-3">
           <ComparisonPanel
             tone="muted"
             label="Com OTAs"
@@ -44,8 +44,6 @@ export default function Problem() {
             caption="em comissões por reserva"
             note="Booking.com, Airbnb e outras plataformas ficam com uma fatia significativa de cada reserva."
           />
-
-          <div className="my-3 h-px bg-n-200" aria-hidden />
 
           <ComparisonPanel
             tone="brand"
@@ -94,7 +92,7 @@ function ComparisonPanel({
 
   return (
     <div
-      className={`group rounded-card-lg p-6 transition-all duration-slow hover:-translate-y-1 hover:shadow-card-hover ${s.wrapper}`}
+      className={`group rounded-card-lg p-12 transition-all duration-slow hover:-translate-y-1 hover:shadow-card-hover ${s.wrapper}`}
     >
       <div className="flex items-center gap-2 mb-4">
         <ToneIcon positive={tone === 'brand'} />
