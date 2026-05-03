@@ -403,6 +403,42 @@ export const blog = {
   cta: { label: "Ver Todos os Artigos", href: "/blog" },
 };
 
+export const useCasesPage = {
+  properties: [
+    {
+      label: "Alojamento rural · Minho",
+      googleImage: { src: "/use-cases/google-1.jpg", width: 887, height: 826 },
+      bookingImage: { src: "/use-cases/booking-1.jpg", width: 2400, height: 1792 },
+    },
+    {
+      label: "Retiro na natureza · Norte de Portugal",
+      googleImage: { src: "/use-cases/google-2.jpg", width: 887, height: 826 },
+      bookingImage: { src: "/use-cases/booking-2.jpg", width: 2400, height: 1792 },
+    },
+    {
+      label: "Hotel urbano · Porto",
+      googleImage: { src: "/use-cases/google-3.jpg", width: 887, height: 826 },
+      bookingImage: { src: "/use-cases/booking-3.jpg", width: 2400, height: 1792 },
+    },
+  ],
+  google: {
+    label: "GOOGLE HOTEL",
+    heading: "A vantagem de preço no Google",
+    intro:
+      "Quando um hóspede pesquisa no Google, o seu website oficial aparece sempre com o melhor preço. É assim que fica a sua propriedade.",
+    callout:
+      "A reserva direta é sempre o melhor preço para o seu hóspede. Quando pesquisam no Google, veem o seu website ao lado do Booking.com e do Expedia — e o seu preço ganha. É isto que configuramos para cada propriedade com quem trabalhamos.",
+  },
+  booking: {
+    label: "MOTOR DE RESERVAS",
+    heading: "O motor de reservas no seu website",
+    intro:
+      "Cada propriedade tem o seu próprio motor de reservas com a sua imagem, integrado diretamente no website. Sem redirecionamentos, sem plataformas de terceiros.",
+    callout:
+      "Cada motor de reservas é personalizado à imagem da propriedade. Cores, logo e tipos de quarto diferentes — construído em 1 a 2 semanas e integrado diretamente no website existente.",
+  },
+};
+
 export const contactCTA = {
   heading: "Pronto para receber mais reservas diretas?",
   subtitle:
