@@ -1,5 +1,6 @@
 'use client';
 
+import { ReactNode } from 'react';
 import { problem } from '@/lib/constants';
 import { useInView } from '@/lib/useInView';
 import { withHighlight } from '@/lib/highlight';
@@ -42,7 +43,7 @@ export default function Problem() {
             label="Com OTAs"
             number={settled ? '−15-25%' : `−${negativeCount}%`}
             caption="em comissões por reserva"
-            note="Booking.com, Airbnb e outras plataformas ficam com uma fatia significativa de cada reserva."
+            note={<><span className="block">Booking.com, Airbnb e outras plataformas ficam</span><span className="block">com uma fatia significativa de cada reserva.</span></>}
           />
 
           <ComparisonPanel
@@ -50,7 +51,7 @@ export default function Problem() {
             label="Reservas Diretas"
             number="0%"
             caption="comissão. Controlo total."
-            note="Mantém o controlo sobre preços, comunicação e a relação com o hóspede."
+            note={<><span className="block">Mantém o controlo sobre preços, comunicação</span><span className="block">e a relação com o hóspede.</span></>}
           />
         </div>
       </div>
@@ -62,7 +63,7 @@ const PANEL_STYLES = {
   brand: {
     wrapper: 'bg-navy text-white',
     label: 'text-white/60',
-    number: 'text-orange-text',
+    number: 'text-orange',
     caption: 'text-white',
     note: 'text-white/60',
   },
@@ -86,7 +87,7 @@ function ComparisonPanel({
   label: string;
   number: string;
   caption: string;
-  note: string;
+  note: ReactNode;
 }) {
   const s = PANEL_STYLES[tone];
 

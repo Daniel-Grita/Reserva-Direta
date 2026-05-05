@@ -1,29 +1,32 @@
 'use client';
 
-import { solucaoPage } from '@/lib/constants';
 import { useInView } from '@/lib/useInView';
-import { withGlossary } from '@/lib/glossary';
 import ServiceIcon from '../ui/ServiceIcon';
 
-export default function SolucaoTrust() {
+type Props = {
+  included: {
+    heading: string;
+    items: readonly string[];
+  };
+};
+
+export default function ServiceIncluded({ included }: Props) {
   const [ref, inView] = useInView<HTMLElement>();
+
   return (
-    <section ref={ref} data-reveal={inView} className="bg-light-blue py-section-y">
+    <section ref={ref} data-reveal={inView} className="bg-white py-section-y">
       <div className="section-container">
-        <div className="reveal-up text-label font-body uppercase tracking-label text-orange-text mb-4">
-          {solucaoPage.trust.label}
-        </div>
         <h2 className="reveal-up text-display-md lg:text-display-lg font-display text-navy mb-10">
-          {solucaoPage.trust.heading}
+          {included.heading}
         </h2>
 
         <ul className="reveal-stagger grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
-          {solucaoPage.trust.bullets.map((b, i) => (
+          {included.items.map((item, i) => (
             <li key={i} className="flex gap-3 items-start">
               <span aria-hidden className="flex-shrink-0 text-orange-text mt-0.5">
                 <ServiceIcon name="check" className="w-5 h-5" />
               </span>
-              <span className="text-body-base font-body text-n-900">{withGlossary(b)}</span>
+              <span className="text-body-base font-body text-n-900">{item}</span>
             </li>
           ))}
         </ul>

@@ -2,6 +2,7 @@
 
 import { bookingSystem, solucaoPage } from '@/lib/constants';
 import { useInView } from '@/lib/useInView';
+import { withGlossary } from '@/lib/glossary';
 import ServiceIcon from '../ui/ServiceIcon';
 
 export default function SolucaoFeatures() {
@@ -26,7 +27,7 @@ export default function SolucaoFeatures() {
                 <ServiceIcon name={solucaoPage.features.icons[i]} className="w-6 h-6" />
               </div>
               <h3 className="text-display-xs font-display text-navy mb-2">{card.title}</h3>
-              <p className="text-body-sm font-body text-n-600">{card.description}</p>
+              <p className="text-body-sm font-body text-n-600">{withGlossary(card.description)}</p>
             </article>
           ))}
         </div>

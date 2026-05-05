@@ -1,4 +1,5 @@
 export const navItems = [
+  { label: "Início", href: "/" },
   { label: "Quem Somos", href: "/quem-somos" },
   { label: "A Nossa Solução", href: "/a-nossa-solucao" },
   { label: "Serviços", href: "/servicos" },
@@ -48,7 +49,7 @@ export const aboutPage = {
   },
   team: {
     label: "A EQUIPA",
-    heading: "Conhece quem está por trás da Reserva Direta",
+    heading: "Conhece quem está por trás da Reserva Direta",
     members: [
       {
         name: "João Brazão",
@@ -209,35 +210,35 @@ export const services = {
       icon: "palette",
       title: "Design Gráfico & Branding",
       description:
-        "Criamos ou revitalizamos a identidade visual do seu alojamento, desde o logo até aos materiais de comunicação, para que se destaque no mercado.",
+        "Identidade visual completa: logo, paleta e materiais de comunicação para se destacar no mercado.",
       cta: "",
     },
     {
       icon: "globe",
       title: "Website Profissional",
       description:
-        "Website rápido, otimizado para conversões e pensado para receber reservas diretas. Fica com a propriedade completa do código, domínio e hosting.",
+        "Rápido, otimizado para conversões e reservas diretas. Código, domínio e hosting são seus.",
       cta: "",
     },
     {
       icon: "phone",
       title: "Marketing Digital",
       description:
-        "Gestão de redes sociais, otimização de perfis nas OTAs e criação de conteúdo estratégico para atrair mais viajantes e converter reservas.",
+        "Redes sociais, OTAs e conteúdo estratégico para atrair viajantes e converter reservas.",
       cta: "",
     },
     {
       icon: "bolt",
       title: "Tecnologia para Reservas",
       description:
-        "Motor de reservas CultBooking, Google Hotel Ads e Channel Manager. A stack completa para maximizar reservas diretas e reduzir comissões.",
+        "CultBooking, Google Hotel Ads e Channel Manager para maximizar diretas e reduzir comissões.",
       cta: "",
     },
     {
       icon: "handshake",
       title: "Consultoria e Fidelização",
       description:
-        "Ajudamos a conhecer melhor os seus hóspedes e a criar estratégias de fidelização que transformam estadias únicas em clientes que voltam ano após ano.",
+        "Estratégias de fidelização que transformam estadias únicas em clientes que voltam.",
       cta: "",
     },
   ],
@@ -305,6 +306,161 @@ export const servicesPage = {
     },
   ],
 };
+
+export const serviceDetails = {
+  branding: {
+    eyebrow: "DESIGN GRÁFICO & BRANDING",
+    heading: "Uma identidade visual que se destaca",
+    intro:
+      "Criamos ou revitalizamos a identidade do seu alojamento, do logo aos materiais de comunicação, para que cada ponto de contacto reforce a marca.",
+    included: {
+      heading: "O que está incluído",
+      items: [
+        "Logo e identidade visual",
+        "Paleta cromática e tipografia",
+        "Materiais para impressão",
+        "Templates para redes sociais",
+        "Manual de marca",
+      ],
+    },
+    process: {
+      heading: "Como trabalhamos",
+      steps: [
+        { number: "01", title: "Auditoria visual", description: "Analisamos a identidade atual e o posicionamento do seu alojamento." },
+        { number: "02", title: "Conceito criativo", description: "Apresentamos direções visuais alinhadas com o público que quer atrair." },
+        { number: "03", title: "Execução", description: "Desenvolvemos o sistema de marca completo e os materiais necessários." },
+        { number: "04", title: "Entrega", description: "Recebe ficheiros editáveis, manual de marca e aplicação em todos os canais." },
+      ],
+    },
+    faq: [
+      { question: "Já tenho um logo. Vale a pena refazer?", answer: "Depende. Avaliamos o que existe e se justifica evoluir, refrescar ou reconstruir do zero. Não substituímos por gosto, só quando há retorno claro." },
+      { question: "Em quanto tempo fica pronto?", answer: "Entre 2 a 4 semanas, conforme o âmbito. Identidade visual base demora menos; sistema completo com manual e materiais pode chegar às 4 semanas." },
+      { question: "Os ficheiros são meus?", answer: "Sim. Recebe todos os ficheiros editáveis, formatos vetoriais e manual de marca. A propriedade é totalmente sua." },
+    ],
+  },
+  website: {
+    eyebrow: "WEBSITE PROFISSIONAL",
+    heading: "Um site rápido, otimizado para reservas",
+    intro:
+      "Construímos um website pensado para converter visitantes em hóspedes, com motor de reservas integrado e propriedade total do código, domínio e hosting.",
+    included: {
+      heading: "O que está incluído",
+      items: [
+        "Design responsivo e adaptado a mobile",
+        "Otimizado para conversão",
+        "Integração com motor de reservas",
+        "SEO técnico de base",
+        "Hosting e domínio próprios",
+      ],
+    },
+    process: {
+      heading: "Como trabalhamos",
+      steps: [
+        { number: "01", title: "Briefing & wireframes", description: "Definimos a arquitetura, o conteúdo e os fluxos críticos antes de desenhar." },
+        { number: "02", title: "Design", description: "Criamos as páginas com a sua identidade e foco em converter visitas em reservas." },
+        { number: "03", title: "Desenvolvimento", description: "Implementamos com performance, SEO e integração ao motor de reservas." },
+        { number: "04", title: "Lançamento", description: "Migração, testes e ativação, com formação para gerir o site sozinho." },
+      ],
+    },
+    faq: [
+      { question: "Quanto tempo demora a ficar online?", answer: "Tipicamente 1 a 2 semanas, dependendo da complexidade e da disponibilidade do conteúdo." },
+      { question: "Consigo editar o site sem programador?", answer: "Sim. Entregamos com formação e ferramentas que permitem alterar textos e fotos sem depender de nós." },
+      { question: "O hosting fica connosco?", answer: "Não. Fica em seu nome, com acesso total. Tudo é seu desde o primeiro dia." },
+    ],
+  },
+  "marketing-digital": {
+    eyebrow: "MARKETING DIGITAL",
+    heading: "Mais visibilidade, mais reservas",
+    intro:
+      "Tornamos o seu alojamento visível para os viajantes certos, em redes sociais, OTAs e Google, com conteúdo e campanhas pensadas para converter.",
+    included: {
+      heading: "O que está incluído",
+      items: [
+        "Gestão de redes sociais",
+        "Otimização de perfis em OTAs",
+        "Estratégia de conteúdo",
+        "Campanhas pagas (Meta e Google)",
+        "Email marketing",
+      ],
+    },
+    process: {
+      heading: "Como trabalhamos",
+      steps: [
+        { number: "01", title: "Auditoria", description: "Analisamos canais atuais, concorrência e oportunidades pouco exploradas." },
+        { number: "02", title: "Estratégia", description: "Definimos objetivos, públicos e plano de conteúdo e campanhas." },
+        { number: "03", title: "Execução", description: "Produzimos, publicamos e gerimos campanhas com calendário definido." },
+        { number: "04", title: "Otimização", description: "Medimos resultados, ajustamos investimento e amplificamos o que funciona." },
+      ],
+    },
+    faq: [
+      { question: "Vale a pena com poucos quartos?", answer: "Sim. O importante é o ROI, não a escala. Com investimento controlado e foco no público certo, mesmo alojamentos pequenos veem retorno." },
+      { question: "Trabalham com que redes?", answer: "Instagram, Facebook, Google e email são a base. Adicionamos outras se fizer sentido para o seu público." },
+      { question: "Quem produz o conteúdo?", answer: "Nós. Pode partilhar materiais e fotos, mas a redação, o design e a publicação ficam do nosso lado." },
+    ],
+  },
+  tecnologia: {
+    eyebrow: "TECNOLOGIA PARA RESERVAS",
+    heading: "A stack completa para reservas diretas",
+    intro:
+      "Motor de reservas CultBooking, Google Hotel Ads e Channel Manager para reduzir comissões e ter o controlo total da distribuição.",
+    included: {
+      heading: "O que está incluído",
+      items: [
+        "Motor de reservas CultBooking",
+        "Google Hotel Ads",
+        "Channel Manager (CultSwitch)",
+        "Integração com Booking.com, Airbnb e Expedia",
+        "Relatórios e analytics",
+      ],
+    },
+    process: {
+      heading: "Como trabalhamos",
+      steps: [
+        { number: "01", title: "Setup", description: "Criamos a conta CultBooking e configuramos quartos, tarifas e políticas." },
+        { number: "02", title: "Integração", description: "Ligamos o motor ao seu site e ao Channel Manager para sincronizar canais." },
+        { number: "03", title: "Configuração", description: "Ativamos Google Hotel Ads e ligamos OTAs com paridade de preços." },
+        { number: "04", title: "Lançamento", description: "Testes finais, formação e arranque. Operacional em 1 a 2 semanas." },
+      ],
+    },
+    faq: [
+      { question: "Tenho mensalidade?", answer: "Não. O motor de reservas cobra apenas 5% por reserva concretizada. O Channel Manager tem custo conforme canais e quartos." },
+      { question: "Funciona com o meu PMS?", answer: "Sim, na maioria dos casos. O CultBooking integra com os principais PMS do mercado. Confirmamos antes de avançar." },
+      { question: "E se já tenho Booking.com?", answer: "Continua a usar. O objetivo é reduzir dependência, não cortar canais. Sincronizamos tudo e captamos diretas em paralelo." },
+    ],
+  },
+  fidelizacao: {
+    eyebrow: "CONSULTORIA E FIDELIZAÇÃO",
+    heading: "Estadias únicas em hóspedes que voltam",
+    intro:
+      "Criamos estratégias de fidelização e comunicação pós-estadia para transformar reservas únicas em clientes recorrentes.",
+    included: {
+      heading: "O que está incluído",
+      items: [
+        "Análise do perfil de hóspede",
+        "Programa de fidelização",
+        "Comunicação pós-estadia",
+        "Estratégia de retorno",
+        "Métricas e acompanhamento",
+      ],
+    },
+    process: {
+      heading: "Como trabalhamos",
+      steps: [
+        { number: "01", title: "Diagnóstico", description: "Analisamos a base de hóspedes, padrões de retorno e oportunidades." },
+        { number: "02", title: "Estratégia", description: "Definimos benefícios, comunicação e canais para criar relação contínua." },
+        { number: "03", title: "Implementação", description: "Configuramos sistemas, mensagens automáticas e materiais de apoio." },
+        { number: "04", title: "Acompanhamento", description: "Medimos retorno, repetição e satisfação. Ajustamos com base nos dados." },
+      ],
+    },
+    faq: [
+      { question: "Quanto tempo até ver resultados?", answer: "Os primeiros sinais aparecem em 3 a 6 meses, à medida que hóspedes regressam ou recomendam. É uma estratégia de médio prazo, não imediata." },
+      { question: "Funciona com alojamentos pequenos?", answer: "Sim. Quanto mais pequena a propriedade, mais cada cliente recorrente vale, e mais simples é manter relação direta." },
+      { question: "Precisamos de software caro?", answer: "Não. Trabalhamos com ferramentas acessíveis ou já existentes. O essencial é a estratégia, não a tecnologia." },
+    ],
+  },
+} as const;
+
+export type ServiceSlug = keyof typeof serviceDetails;
 
 export const howItWorks = {
   label: "COMO FUNCIONA",

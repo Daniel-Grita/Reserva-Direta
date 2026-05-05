@@ -1,16 +1,34 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { faq } from '@/lib/constants';
 import SectionHeader from '../ui/SectionHeader';
 import { useInView } from '@/lib/useInView';
 import { withHighlight } from '@/lib/highlight';
 
-export default function FAQ() {
+type Item = { question: string; answer: string };
+
+type Props = {
+  items?: readonly Item[];
+  label?: string;
+  heading?: string;
+  intro?: ReactNode;
+  showToggleAll?: boolean;
+  idPrefix?: string;
+};
+
+export default function FAQ({
+  items = faq.items,
+  label = faq.label,
+  heading = faq.heading,
+  intro = withHighlight(faq.intro, 'proprietários como você'),
+  showToggleAll = true,
+  idPrefix = 'faq',
+}: Props) {
   const [openIndices, setOpenIndices] = useState<Set<number>>(new Set());
   const [ref, inView] = useInView<HTMLElement>();
 
-  const allOpen = openIndices.size === faq.items.length;
+  const allOpen = openIndices.size === items.length;
 
   const toggleOne = (i: number) => {
     setOpenIndices((prev) => {
@@ -22,36 +40,34 @@ export default function FAQ() {
   };
 
   const toggleAll = () => {
-    setOpenIndices(allOpen ? new Set() : new Set(faq.items.map((_, i) => i)));
+    setOpenIndices(allOpen ? new Set() : new Set(items.map((_, i) => i)));
   };
 
   return (
     <section ref={ref} data-reveal={inView} className="bg-white py-section-y">
       <div className="section-container max-w-3xl">
         <div className="reveal-up">
-          <SectionHeader
-            label={faq.label}
-            heading={faq.heading}
-            intro={withHighlight(faq.intro, 'proprietários como você')}
-          />
+          <SectionHeader label={label} heading={heading} intro={intro} />
         </div>
 
-        <div className="reveal-up flex justify-end mb-4">
-          <button
-            type="button"
-            onClick={toggleAll}
-            aria-expanded={allOpen}
-            className="text-body-sm font-body font-bold text-orange-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-input px-2 py-1 -mr-2"
-          >
-            {allOpen ? 'Recolher todas' : 'Expandir todas'}
-          </button>
-        </div>
+        {showToggleAll && (
+          <div className="reveal-up flex justify-end mb-4">
+            <button
+              type="button"
+              onClick={toggleAll}
+              aria-expanded={allOpen}
+              className="text-body-sm font-body font-bold text-orange-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-input px-2 py-1 -mr-2"
+            >
+              {allOpen ? 'Recolher todas' : 'Expandir todas'}
+            </button>
+          </div>
+        )}
 
         <div className="reveal-stagger space-y-4">
-          {faq.items.map((item, i) => {
+          {items.map((item, i) => {
             const isOpen = openIndices.has(i);
-            const buttonId = `faq-trigger-${i}`;
-            const panelId = `faq-panel-${i}`;
+            const buttonId = `${idPrefix}-trigger-${i}`;
+            const panelId = `${idPrefix}-panel-${i}`;
             return (
               <div
                 key={i}

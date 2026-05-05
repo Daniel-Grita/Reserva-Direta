@@ -21,7 +21,8 @@ export default function BookingSystem() {
               {bookingSystem.heading}
             </h2>
             <p className="text-body-base font-body text-n-600">
-              {withHighlight(bookingSystem.intro, 'sem intermediários')}
+              <span className="block">Integramos o CultBooking, um motor de reservas profissional e otimizado para conversões, diretamente no seu website.</span>
+              <span className="block">{withHighlight('Os seus hóspedes reservam sem sair do seu site, sem intermediários, e você mantém o controlo total.', 'sem intermediários')}</span>
             </p>
           </div>
 

@@ -19,7 +19,12 @@ export default function Services() {
           <SectionHeader
             label={services.label}
             heading={services.heading}
-            intro={withHighlight(services.intro, 'resultados máximos')}
+            intro={
+              <>
+                <span className="block">{withHighlight(services.intro.split('. ')[0] + '.', 'resultados máximos')}</span>
+                <span className="block">Escolha o que faz sentido para o seu alojamento.</span>
+              </>
+            }
           />
         </div>
 

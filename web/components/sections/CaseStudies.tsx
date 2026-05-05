@@ -2,6 +2,7 @@
 
 import { caseStudies } from '@/lib/constants';
 import SectionHeader from '../ui/SectionHeader';
+import { LinkButton } from '../ui/Button';
 import { useInView } from '@/lib/useInView';
 import { withHighlight } from '@/lib/highlight';
 
@@ -15,11 +16,11 @@ export default function CaseStudies() {
           <SectionHeader
             label={caseStudies.label}
             heading={caseStudies.heading}
-            intro={withHighlight(caseStudies.intro, 'por todo o país')}
+            intro={<>{withHighlight(caseStudies.intro.split('. ')[0] + '.', 'por todo o país')}<br />{'Aqui estão alguns exemplos do que implementámos.'}</>}
           />
         </div>
 
-        <div className="reveal-stagger grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="reveal-stagger grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {caseStudies.cases.map((caseItem, i) => (
             <article
               key={i}
@@ -47,6 +48,12 @@ export default function CaseStudies() {
               </div>
             </article>
           ))}
+        </div>
+
+        <div className="reveal-up">
+          <LinkButton href="/casos-de-uso" variant="dark">
+            Ver todos os casos de uso
+          </LinkButton>
         </div>
       </div>
     </section>
