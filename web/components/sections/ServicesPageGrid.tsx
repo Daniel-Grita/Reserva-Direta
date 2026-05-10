@@ -23,7 +23,8 @@ export default function ServicesPageGrid() {
             return (
               <article
                 key={card.slug}
-                className="group bg-white rounded-card-lg overflow-hidden border border-n-150 transition-all duration-slow hover:-translate-y-1 hover:shadow-card-hover"
+                id={card.slug}
+                className="group scroll-mt-24 bg-white rounded-card-lg overflow-hidden border border-n-150 transition-all duration-slow hover:-translate-y-1 hover:shadow-card-hover"
               >
                 <div className="aspect-[16/10] bg-n-200 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

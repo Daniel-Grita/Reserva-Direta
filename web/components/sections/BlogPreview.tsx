@@ -14,7 +14,7 @@ export default function BlogPreview() {
       <div className="section-container">
         <div className="reveal-up">
           <SectionHeader
-            className="!max-w-xl"
+            className="!max-w-md"
             label={blog.label}
             heading={blog.heading}
             intro={withHighlight(blog.intro, 'guias práticos')}
