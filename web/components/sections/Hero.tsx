@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { hero } from '@/lib/constants';
 import { withHighlight } from '@/lib/highlight';
 import { LinkButton } from '../ui/Button';
@@ -11,7 +12,7 @@ export default function Hero() {
             {hero.heading}
           </h1>
 
-          <p className="text-body-base font-body text-n-600 max-w-md">
+          <p className="text-body-base font-body text-n-600 max-w-[26rem]">
             {withHighlight(hero.subtitle, 'reservas diretas')}
           </p>
 
@@ -25,13 +26,14 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-stagger w-full lg:max-w-md lg:mx-auto aspect-[4/3] lg:aspect-square rounded-card-lg overflow-hidden bg-n-300 shadow-card-hover">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/hero/hero-bedroom.png"
+        <div className="hero-stagger relative w-full lg:max-w-md lg:mx-auto aspect-[4/3] md:aspect-[3/2] lg:aspect-square rounded-card-lg overflow-hidden bg-n-300 shadow-card-hover">
+          <Image
+            src="/hero/hero-bedroom.webp"
             alt={hero.mockupNote}
-            loading="eager"
-            className="w-full h-full object-cover"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 480px"
+            className="object-cover"
           />
         </div>
       </div>

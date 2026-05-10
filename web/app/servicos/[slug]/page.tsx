@@ -7,6 +7,7 @@ import ServiceDetailHero from '@/components/sections/ServiceDetailHero';
 import ServiceIncluded from '@/components/sections/ServiceIncluded';
 import ServiceProcess from '@/components/sections/ServiceProcess';
 import FAQ from '@/components/sections/FAQ';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { serviceDetails, servicesPage, type ServiceSlug } from '@/lib/constants';
 
 const slugs = Object.keys(serviceDetails) as ServiceSlug[];
@@ -40,8 +41,33 @@ export default async function ServiceDetailPage({
 
   const card = servicesPage.cards.find((c) => c.slug === slug);
 
+  const serviceJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: detail.heading,
+    description: detail.intro,
+    serviceType: detail.eyebrow,
+    provider: {
+      "@type": "LocalBusiness",
+      name: "Reserva Direta",
+      url: "https://reservadireta.pt",
+    },
+    areaServed: { "@type": "Country", name: "Portugal" },
+    url: `https://reservadireta.pt/servicos/${slug}`,
+  });
+
   return (
     <main id="main" tabIndex={-1} className="w-full focus:outline-none">
+      <Breadcrumbs
+        items={[
+          { name: 'Serviços', url: '/servicos' },
+          { name: detail.heading, url: `/servicos/${slug}` },
+        ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serviceJsonLd }}
+      />
       <Navbar />
       <ServiceDetailHero detail={detail} image={card?.image} />
       <ServiceIncluded included={detail.included} />

@@ -14,6 +14,7 @@ export default function Tooltip({ term, definition }: Props) {
       <span
         tabIndex={0}
         role="button"
+        aria-label={typeof term === 'string' ? `${term}: ${definition}` : definition}
         aria-describedby={id}
         title={definition}
         className="border-b border-dotted border-current cursor-help focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 rounded-sm"

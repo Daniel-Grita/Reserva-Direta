@@ -4,6 +4,7 @@ import ServicesPageHero from '@/components/sections/ServicesPageHero';
 import ServicesPageGrid from '@/components/sections/ServicesPageGrid';
 import ContactCTA from '@/components/sections/ContactCTA';
 import Footer from '@/components/Footer';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Serviços — Reserva Direta',
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function ServicosPage() {
   return (
     <main id="main" tabIndex={-1} className="w-full focus:outline-none">
+      <Breadcrumbs items={[{ name: 'Serviços', url: '/servicos' }]} />
       <Navbar />
       <ServicesPageHero />
       <ServicesPageGrid />

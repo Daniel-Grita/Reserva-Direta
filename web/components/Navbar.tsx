@@ -27,7 +27,8 @@ export default function Navbar() {
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    setOpen(false);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpen((prev) => (prev ? false : prev));
   }, [pathname]);
 
   useEffect(() => {
@@ -144,7 +145,7 @@ export default function Navbar() {
                 href={item.href}
                 aria-current={isActive ? 'page' : undefined}
                 onClick={closeMenu}
-                className={`text-display-xs font-display py-3 border-b border-n-150 transition-colors duration-base ${
+                className={`text-display-xs font-display py-4 sm:py-3 border-b border-n-150 transition-colors duration-base ${
                   isActive ? 'text-orange-text' : 'text-navy hover:text-orange-text'
                 }`}
               >

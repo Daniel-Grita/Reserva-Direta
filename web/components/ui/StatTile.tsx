@@ -40,7 +40,7 @@ export default function StatTile({ stat, run, index, startDelayBase = 700 }: Pro
           className="absolute left-0 -bottom-1.5 h-[3px] w-10 origin-left scale-x-0 rounded-full bg-orange transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
         />
       </div>
-      <p className="text-body-sm font-body text-n-600">
+      <p className="text-body-sm font-body text-n-600 max-w-[11rem] mx-auto leading-snug text-balance">
         {stat.label.split('\n').map((line, idx) => (
           <span key={idx} className="block">
             {keepLastTwoTogether(line)}

@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Figtree } from "next/font/google";
+import CookieBanner from "@/components/ui/CookieBanner";
+import CloudflareAnalytics from "@/components/seo/CloudflareAnalytics";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -17,13 +19,21 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://reservadireta.pt"),
   title: "Reserva Direta — Reservas Diretas para Alojamentos",
   description: "Ajudamos alojamentos locais em Portugal a aumentar reservas diretas e reduzir comissões das OTAs.",
   openGraph: {
-    title: "Reserva Direta",
-    description: "Mais reservas diretas. Menos comissões.",
+    title: "Reserva Direta — Mais reservas diretas. Menos comissões.",
+    description: "Ajudamos alojamentos locais em Portugal a aumentar reservas diretas e reduzir comissões das OTAs.",
     url: "https://reservadireta.pt",
+    siteName: "Reserva Direta",
+    locale: "pt_PT",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Reserva Direta — Mais reservas diretas. Menos comissões.",
+    description: "Ajudamos alojamentos locais em Portugal a aumentar reservas diretas e reduzir comissões das OTAs.",
   },
 };
 
@@ -61,10 +71,12 @@ export default function RootLayout({
   return (
     <html
       lang="pt"
-      className={`${bricolage.variable} ${figtree.variable}`}
-      style={{ height: "100%" }}
+      className={`${bricolage.variable} ${figtree.variable} h-full`}
     >
-      <body suppressHydrationWarning style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }} className="bg-white text-n-900 font-body">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen flex flex-col bg-white text-n-900 font-body"
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: localBusinessJsonLd }}
@@ -76,6 +88,8 @@ export default function RootLayout({
           Saltar para o conteúdo
         </a>
         {children}
+        <CookieBanner />
+        <CloudflareAnalytics />
       </body>
     </html>
   );

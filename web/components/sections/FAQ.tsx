@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { faq } from '@/lib/constants';
 import SectionHeader from '../ui/SectionHeader';
 import { useInView } from '@/lib/useInView';
@@ -43,8 +43,26 @@ export default function FAQ({
     setOpenIndices(allOpen ? new Set() : new Set(items.map((_, i) => i)));
   };
 
+  const faqJsonLd = useMemo(
+    () =>
+      JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: items.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      }),
+    [items],
+  );
+
   return (
     <section ref={ref} data-reveal={inView} className="bg-white py-section-y">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: faqJsonLd }}
+      />
       <div className="section-container max-w-3xl">
         <div className="reveal-up">
           <SectionHeader label={label} heading={heading} intro={intro} />
@@ -56,7 +74,7 @@ export default function FAQ({
               type="button"
               onClick={toggleAll}
               aria-expanded={allOpen}
-              className="text-body-sm font-body font-bold text-orange-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-input px-2 py-1 -mr-2"
+              className="text-body-sm font-body font-bold text-navy hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-input px-2 py-1 -mr-2"
             >
               {allOpen ? 'Recolher todas' : 'Expandir todas'}
             </button>

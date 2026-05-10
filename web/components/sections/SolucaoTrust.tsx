@@ -8,7 +8,7 @@ import ServiceIcon from '../ui/ServiceIcon';
 export default function SolucaoTrust() {
   const [ref, inView] = useInView<HTMLElement>();
   return (
-    <section ref={ref} data-reveal={inView} className="bg-light-blue py-section-y">
+    <section ref={ref} data-reveal={inView} id="confianca" className="bg-light-blue py-section-y">
       <div className="section-container">
         <div className="reveal-up text-label font-body uppercase tracking-label text-orange-text mb-4">
           {solucaoPage.trust.label}

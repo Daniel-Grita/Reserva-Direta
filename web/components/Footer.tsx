@@ -23,7 +23,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-9 h-9 rounded-full bg-white/5 hover:bg-orange flex items-center justify-center text-white/70 hover:text-white transition-colors duration-base"
+                  className="w-11 h-11 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-orange flex items-center justify-center text-white/70 hover:text-white transition-colors duration-base"
                 >
                   <SocialIcon name={s.icon as SocialIconName} />
                 </a>
@@ -36,7 +36,7 @@ export default function Footer() {
               <h4 className="text-label font-body uppercase tracking-label text-white mb-4">
                 {column.title}
               </h4>
-              <ul className="space-y-2">
+              <ul className={column.links.length > 4 ? 'grid grid-cols-2 gap-x-6 gap-y-2' : 'space-y-2'}>
                 {column.links.map((link, j) => (
                   <li key={j}>
                     <Link

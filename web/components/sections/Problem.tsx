@@ -1,10 +1,8 @@
 'use client';
 
-import { ReactNode } from 'react';
 import { problem } from '@/lib/constants';
 import { useInView } from '@/lib/useInView';
 import { withHighlight } from '@/lib/highlight';
-import { useCountUp } from '@/lib/useCountUp';
 
 const PARAGRAPH_HIGHLIGHTS = [
   '15-25% de cada reserva',
@@ -14,8 +12,6 @@ const PARAGRAPH_HIGHLIGHTS = [
 
 export default function Problem() {
   const [ref, inView] = useInView<HTMLElement>();
-  const negativeCount = useCountUp(25, inView);
-  const settled = negativeCount >= 25;
 
   return (
     <section ref={ref} data-reveal={inView} className="bg-white py-section-y">
@@ -41,17 +37,15 @@ export default function Problem() {
           <ComparisonPanel
             tone="muted"
             label="Com OTAs"
-            number={settled ? '−15-25%' : `−${negativeCount}%`}
-            caption="em comissões por reserva"
-            note={<><span className="block">Booking.com, Airbnb e outras plataformas ficam</span><span className="block">com uma fatia significativa de cada reserva.</span></>}
+            headline="− Receitas"
+            note="As OTAs ficam com uma fatia significativa de cada reserva."
           />
 
           <ComparisonPanel
             tone="brand"
             label="Reservas Diretas"
-            number="0%"
-            caption="comissão. Controlo total."
-            note={<><span className="block">Mantém o controlo sobre preços, comunicação</span><span className="block">e a relação com o hóspede.</span></>}
+            headline="+ Receitas"
+            note="Mantém o controlo sobre preços, comunicação e a relação com o hóspede."
           />
         </div>
       </div>
@@ -63,15 +57,13 @@ const PANEL_STYLES = {
   brand: {
     wrapper: 'bg-navy text-white',
     label: 'text-white/60',
-    number: 'text-orange',
-    caption: 'text-white',
-    note: 'text-white/60',
+    headline: 'text-orange',
+    note: 'text-white/80',
   },
   muted: {
     wrapper: 'bg-light-blue text-navy',
     label: 'text-n-600',
-    number: 'text-navy',
-    caption: 'text-n-900',
+    headline: 'text-navy',
     note: 'text-n-600',
   },
 } as const;
@@ -79,15 +71,13 @@ const PANEL_STYLES = {
 function ComparisonPanel({
   tone,
   label,
-  number,
-  caption,
+  headline,
   note,
 }: {
   tone: keyof typeof PANEL_STYLES;
   label: string;
-  number: string;
-  caption: string;
-  note: ReactNode;
+  headline: string;
+  note: string;
 }) {
   const s = PANEL_STYLES[tone];
 
@@ -101,11 +91,10 @@ function ComparisonPanel({
           {label}
         </span>
       </div>
-      <div className={`text-display-md font-display leading-none mb-3 whitespace-nowrap tabular-nums ${s.number}`}>
-        {number}
+      <div className={`text-display-md font-display leading-none mb-4 ${s.headline}`}>
+        {headline}
       </div>
-      <div className={`text-body-base font-body mb-2 ${s.caption}`}>{caption}</div>
-      <p className={`text-body-sm font-body ${s.note}`}>{note}</p>
+      <p className={`text-body-base font-body ${s.note}`}>{note}</p>
     </div>
   );
 }

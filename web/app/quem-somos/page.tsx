@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import AboutHero from '@/components/sections/AboutHero';
-import AboutTeam from '@/components/sections/AboutTeam';
-import AboutValues from '@/components/sections/AboutValues';
+import AboutTeamValues from '@/components/sections/AboutTeamValues';
 import ContactCTA from '@/components/sections/ContactCTA';
 import Footer from '@/components/Footer';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Quem Somos — Reserva Direta',
@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 export default function QuemSomosPage() {
   return (
     <main id="main" tabIndex={-1} className="w-full focus:outline-none">
+      <Breadcrumbs items={[{ name: 'Quem Somos', url: '/quem-somos' }]} />
       <Navbar />
       <AboutHero />
-      <AboutTeam />
-      <AboutValues />
+      <AboutTeamValues />
       <ContactCTA />
       <Footer />
     </main>

@@ -21,9 +21,9 @@ export default function CaseStudies() {
         </div>
 
         <div className="reveal-stagger grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          {caseStudies.cases.map((caseItem, i) => (
+          {caseStudies.cases.map((caseItem) => (
             <article
-              key={i}
+              key={caseItem.title}
               className="group bg-white rounded-card overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-slow flex flex-col"
             >
               <div className="relative aspect-[4/3] bg-n-200 overflow-hidden">
@@ -32,6 +32,7 @@ export default function CaseStudies() {
                   src={caseItem.image}
                   alt={caseItem.title}
                   loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="w-full h-full object-cover transition-transform duration-slow group-hover:scale-[1.03]"
                 />
                 <span className="absolute top-3 left-3 inline-flex items-center bg-white/95 backdrop-blur-sm text-navy text-label font-body font-bold uppercase tracking-label px-3 py-1.5 rounded-full">
@@ -39,7 +40,7 @@ export default function CaseStudies() {
                 </span>
               </div>
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-display-xs font-display font-bold text-navy mb-2 leading-tight">
+                <h3 className="text-card-title font-display font-bold text-navy mb-2 leading-tight">
                   {caseItem.title}
                 </h3>
                 <p className="text-body-sm font-body text-n-600 flex-1">

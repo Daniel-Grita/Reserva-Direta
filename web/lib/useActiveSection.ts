@@ -26,6 +26,9 @@ export function useActiveSection(ids: string[]): string | null {
 
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
+    // `key` is the joined `ids` — re-running only when the *contents* change
+    // avoids tearing down the observer on every parent re-render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
   return active;

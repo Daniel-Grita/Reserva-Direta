@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { contactCTA } from '@/lib/constants';
+import { aboutPage, contactCTA } from '@/lib/constants';
 import { useInView } from '@/lib/useInView';
 import { withNoBreak } from '@/lib/highlight';
 
@@ -90,6 +90,8 @@ export default function ContactCTA() {
               {withNoBreak(contactCTA.subtitle, 'podemos ajudar')}
             </p>
           </div>
+
+          <FoundersIntro />
 
           <div className="bg-white rounded-card-lg p-8 lg:p-10">
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
@@ -215,5 +217,38 @@ export default function ContactCTA() {
         </div>
       </div>
     </section>
+  );
+}
+
+function FoundersIntro() {
+  const founders = aboutPage.team.members;
+  const firstNames = founders.map((m) => m.name.split(' ')[0]).join(' e ');
+  return (
+    <div className="mb-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 bg-white/5 border border-white/10 rounded-card-lg p-5 sm:p-6">
+      <div className="flex -space-x-3 shrink-0">
+        {founders.map((m) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={m.name}
+            src={m.photo.src}
+            alt={m.photo.alt}
+            loading="lazy"
+            className="w-14 h-14 rounded-full object-cover border-2 border-navy ring-2 ring-white/30"
+          />
+        ))}
+      </div>
+      <div className="text-center sm:text-left flex-1">
+        <p className="text-body-sm font-body text-white">
+          <span className="font-bold">{firstNames}</span> respondem pessoalmente em 24 horas.
+        </p>
+        <a
+          href={`mailto:${FALLBACK_EMAIL}`}
+          className="inline-flex items-center gap-1.5 mt-1 text-body-sm font-body font-bold text-orange hover:text-white transition-colors duration-base focus:outline-none focus-visible:ring-2 focus-visible:ring-orange/70 rounded-sm"
+        >
+          {FALLBACK_EMAIL}
+          <span aria-hidden>→</span>
+        </a>
+      </div>
+    </div>
   );
 }

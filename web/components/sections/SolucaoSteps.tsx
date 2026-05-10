@@ -7,7 +7,7 @@ import { LinkButton } from '../ui/Button';
 export default function SolucaoSteps() {
   const [ref, inView] = useInView<HTMLElement>();
   return (
-    <section ref={ref} data-reveal={inView} className="bg-light-blue py-section-y">
+    <section ref={ref} data-reveal={inView} id="como-funciona" className="bg-light-blue py-section-y">
       <div className="section-container">
         <div className="reveal-up text-label font-body uppercase tracking-label text-orange-text mb-4">
           {solucaoPage.steps.label}

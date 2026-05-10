@@ -7,8 +7,6 @@ import ServiceIcon from '../ui/ServiceIcon';
 import { useInView } from '@/lib/useInView';
 import { withHighlight } from '@/lib/highlight';
 
-type ServiceIconName = 'palette' | 'globe' | 'phone' | 'bolt' | 'tools' | 'handshake';
-
 export default function Services() {
   const [ref, inView] = useInView<HTMLElement>();
 
@@ -29,21 +27,26 @@ export default function Services() {
         </div>
 
         <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.cards.map((card, i) => (
-            <div
-              key={i}
-              className="bg-white border border-n-200 rounded-card p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-slow flex flex-col"
+          {services.cards.map((card) => (
+            <Link
+              key={card.slug}
+              href={`/servicos/${card.slug}`}
+              className="group bg-white border border-n-200 rounded-card p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-slow flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2"
             >
               <div className="w-10 h-10 rounded-full bg-cream flex items-center justify-center mb-4 text-navy">
-                <ServiceIcon name={card.icon as ServiceIconName} className="w-5 h-5" />
+                <ServiceIcon name={card.icon} className="w-5 h-5" />
               </div>
-              <h3 className="text-display-xs font-display text-navy mb-2 leading-tight">
+              <h3 className="text-card-title font-display text-navy mb-2 leading-tight">
                 {card.title}
               </h3>
-              <p className="text-body-sm font-body text-n-600 flex-1">
+              <p className="text-body-sm font-body text-n-600 flex-1 mb-4">
                 {card.description}
               </p>
-            </div>
+              <span className="text-button font-body font-bold text-navy inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-[gap] duration-base">
+                {services.cta}
+                <ArrowRightIcon className="w-3.5 h-3.5" />
+              </span>
+            </Link>
           ))}
 
           <Link
@@ -54,10 +57,10 @@ export default function Services() {
               <ArrowRightIcon />
             </div>
             <div>
-              <h3 className="text-display-xs font-display text-white mb-2 leading-tight">
+              <h3 className="text-card-title font-display text-white mb-2 leading-tight">
                 Descobre mais sobre os nossos serviços
               </h3>
-              <span className="text-button font-body font-bold text-orange-text inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-[gap] duration-base">
+              <span className="text-button font-body font-bold text-orange inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-[gap] duration-base">
                 Ver todos
                 <ArrowRightIcon className="w-3.5 h-3.5" />
               </span>

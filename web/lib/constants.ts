@@ -42,9 +42,10 @@ export const aboutPage = {
     label: "NOSSA HISTÓRIA",
     heading: "Como Começámos",
     paragraphs: [
-      "João e Sebastião começaram a Reserva Direta porque viram o mesmo problema repetir-se: pequenos alojamentos, pensões e hotéis boutique pagando 15 a 25% de comissão em cada reserva para Booking.com e Airbnb, com pouco controlo sobre a experiência do hóspede.",
+      "João e Sebastião começaram a Reserva Direta porque viram o mesmo problema repetir-se: pequenos alojamentos, pensões e hotéis boutique pagando 15 a 25% de comissão em cada reserva para as OTAs, com pouco controlo sobre a experiência do hóspede.",
       "Percebemos que havia uma forma melhor: combinar design, tecnologia e marketing para ajudar estas propriedades a ganhar independência das OTAs, a manter mais margem em cada reserva e a ter uma relação direta com os seus hóspedes.",
     ],
+    // TODO: replace this external Unsplash URL with a real client photo in /public/about/.
     image: { src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80", alt: "Receção de hotel boutique" },
   },
   team: {
@@ -53,15 +54,13 @@ export const aboutPage = {
     members: [
       {
         name: "João Brazão",
-        role: "Fundador & Estratégia",
-        bio: "João traz 15+ anos de experiência em marketing digital e estratégia para o setor hoteleiro. Apaixonado por ajudar pequenos negócios a crescer de forma sustentável.",
-        photo: { src: "/team/joao.png", alt: "João Brazão" },
+        role: "Fundador",
+        photo: { src: "/team/joao.webp", alt: "João Brazão" },
       },
       {
         name: "Sebastião Gomes",
-        role: "Fundador & Desenvolvimento",
-        bio: "Sebastião é desenvolvedor full-stack com especialidade em tecnologia hoteleira. Garante que cada projeto é executado com perfeição técnica e atenção ao detalhe.",
-        photo: { src: "/team/sebastiao.png", alt: "Sebastião Gomes" },
+        role: "Fundador",
+        photo: { src: "/team/sebastiao.webp", alt: "Sebastião Gomes" },
       },
     ],
   },
@@ -91,18 +90,18 @@ export const aboutPage = {
 export const hero = {
   heading: "Aumente as suas reservas diretas. Reduza comissões.",
   subtitle:
-    "Ajudamos alojamentos locais em Portugal a libertar-se da dependência das OTAs e a aumentar receita através de reservas diretas, com tecnologia, branding e marketing feitos à medida.",
+    "Ajudamos alojamentos em Portugal a libertar-se da dependência das OTAs e a aumentar receita através de reservas diretas, com tecnologia, branding e marketing feitos à medida.",
   cta1: { label: "Fale Connosco", href: "#contacto" },
   cta2: { label: "Ver Como Funciona", href: "#como-funciona" },
   mockupNote:
-    "Mockup: Booking Engine ou foto de propriedade boutique com overlay de dashboard",
+    "Quarto de alojamento boutique português com luz natural — exemplo de propriedade que aumentou reservas diretas com a Reserva Direta",
 };
 
 export const problem = {
   label: "O PROBLEMA",
   heading: "As OTAs estão a comer as suas margens.",
   paragraphs: [
-    "Se é proprietário de uma pensão, hotel boutique ou alojamento local, provavelmente está a perder 15-25% de cada reserva em comissões para Booking.com, Airbnb e outras plataformas.",
+    "Se é proprietário de uma pensão, hotel boutique ou alojamento local, provavelmente está a perder 15-25% de cada reserva em comissões para as OTAs.",
     "O resultado? Menos controlo sobre o seu negócio. Margens mais apertadas. E uma dependência perigosa de algoritmos que podem mudar a qualquer momento.",
     "A boa notícia? Existe uma forma melhor. Com a estratégia e as ferramentas certas, pode aumentar significativamente as reservas diretas e manter o controlo total sobre preços, comunicação e experiência do hóspede.",
   ],
@@ -143,7 +142,7 @@ export const bookingSystem = {
         number: "3.",
         title: "Sincronização com todas as plataformas",
         description:
-          "Através do Channel Manager da CultSwitch, os seus preços e disponibilidade ficam sincronizados em tempo real entre o seu site, Booking.com, Airbnb, Expedia e outros canais. Sem overbookings, sem gestão manual.",
+          "Através do Channel Manager da CultSwitch, os seus preços e disponibilidade ficam sincronizados em tempo real entre o seu site e as OTAs. Sem overbookings, sem gestão manual.",
       },
       {
         number: "4.",
@@ -191,7 +190,7 @@ export const bookingSystem = {
   channelManager: {
     heading: "Channel Manager (opcional)",
     description:
-      "Se precisar de sincronizar vários canais (Booking.com, Airbnb, Expedia e mais), o Channel Manager da CultSwitch faz tudo automaticamente. Preços, disponibilidade e reservas atualizados em tempo real em todas as plataformas. A mensalidade varia conforme o número de quartos e canais ligados.",
+      "Se precisar de sincronizar várias OTAs em simultâneo, o Channel Manager da CultSwitch faz tudo automaticamente. Preços, disponibilidade e reservas atualizados em tempo real em todas as plataformas. A mensalidade varia conforme o número de quartos e canais ligados.",
   },
   trust: {
     heading: "Tecnologia de confiança",
@@ -205,44 +204,45 @@ export const services = {
   heading: "Tudo o que precisa para crescer online",
   intro:
     "Cada serviço funciona de forma independente, ou em conjunto para resultados máximos. Escolha o que faz sentido para o seu alojamento.",
+  cta: "Saber mais",
   cards: [
     {
       icon: "palette",
+      slug: "branding",
       title: "Design Gráfico & Branding",
       description:
         "Identidade visual completa: logo, paleta e materiais de comunicação para se destacar no mercado.",
-      cta: "",
     },
     {
       icon: "globe",
+      slug: "website",
       title: "Website Profissional",
       description:
         "Rápido, otimizado para conversões e reservas diretas. Código, domínio e hosting são seus.",
-      cta: "",
     },
     {
       icon: "phone",
+      slug: "marketing-digital",
       title: "Marketing Digital",
       description:
         "Redes sociais, OTAs e conteúdo estratégico para atrair viajantes e converter reservas.",
-      cta: "",
     },
     {
       icon: "bolt",
+      slug: "tecnologia",
       title: "Tecnologia para Reservas",
       description:
-        "CultBooking, Google Hotel Ads e Channel Manager para maximizar diretas e reduzir comissões.",
-      cta: "",
+        "Motor de Reserva, Google Hotel Ads e Channel Manager para maximizar diretas e reduzir comissões.",
     },
     {
       icon: "handshake",
+      slug: "fidelizacao",
       title: "Consultoria e Fidelização",
       description:
         "Estratégias de fidelização que transformam estadias únicas em clientes que voltam.",
-      cta: "",
     },
   ],
-};
+} as const;
 
 export const servicesPage = {
   hero: {
@@ -409,7 +409,7 @@ export const serviceDetails = {
         "Motor de reservas CultBooking",
         "Google Hotel Ads",
         "Channel Manager (CultSwitch)",
-        "Integração com Booking.com, Airbnb e Expedia",
+        "Integração com as principais OTAs",
         "Relatórios e analytics",
       ],
     },
@@ -425,7 +425,7 @@ export const serviceDetails = {
     faq: [
       { question: "Tenho mensalidade?", answer: "Não. O motor de reservas cobra apenas 5% por reserva concretizada. O Channel Manager tem custo conforme canais e quartos." },
       { question: "Funciona com o meu PMS?", answer: "Sim, na maioria dos casos. O CultBooking integra com os principais PMS do mercado. Confirmamos antes de avançar." },
-      { question: "E se já tenho Booking.com?", answer: "Continua a usar. O objetivo é reduzir dependência, não cortar canais. Sincronizamos tudo e captamos diretas em paralelo." },
+      { question: "E se já uso OTAs?", answer: "Continua a usar. O objetivo é reduzir dependência, não cortar canais. Sincronizamos tudo e captamos diretas em paralelo." },
     ],
   },
   fidelizacao: {
@@ -500,19 +500,19 @@ export const caseStudies = {
     "Trabalhamos com propriedades de diferentes dimensões por todo o país. Aqui estão alguns exemplos do que implementámos.",
   cases: [
     {
-      image: "/case-studies/case-1.png",
+      image: "/case-studies/case-1.webp",
       category: "Turismo Rural",
       title: "Quinta no Norte",
       description: "Casa de pedra reconvertida com estratégia de reservas diretas a partir do website próprio.",
     },
     {
-      image: "/case-studies/case-2.png",
+      image: "/case-studies/case-2.webp",
       category: "Alojamento Local",
       title: "Apartamento Urbano",
       description: "Apartamento de férias com motor de reservas integrado e presença digital própria.",
     },
     {
-      image: "/case-studies/case-3.png",
+      image: "/case-studies/case-3.webp",
       category: "Hotel Boutique",
       title: "Hotel de Charme",
       description: "Hotel boutique com branding, website e sistema de reservas próprios para reduzir dependência de OTAs.",
@@ -526,7 +526,7 @@ export const faq = {
   intro: "As dúvidas mais comuns que ouvimos de proprietários como você.",
   items: [
     {
-      question: "Já uso o Booking.com exclusivamente. Porquê mudar?",
+      question: "Já uso OTAs exclusivamente. Porquê mudar?",
       answer:
         "Não precisa de mudar. A ideia é complementar, não substituir. Ao adicionar um canal de reservas diretas, reduz a dependência de uma única plataforma, ganha mais margem em cada reserva e passa a ter contacto direto com os seus hóspedes.",
     },
@@ -546,7 +546,7 @@ export const faq = {
         "Olhe para o retorno, não para o custo. Se paga 15-25% de comissão em cada reserva OTA e passa a receber reservas diretas a 5%, o investimento paga-se rapidamente. Cada reserva direta é margem que volta para si.",
     },
     {
-      question: "Prefiro gerir manualmente entre Booking e Airbnb.",
+      question: "Prefiro gerir manualmente entre várias OTAs.",
       answer:
         "A gestão manual funciona até ao dia em que acontece um overbooking. Um Channel Manager sincroniza preços e disponibilidade automaticamente entre todas as plataformas, poupa tempo e elimina erros que custam dinheiro e reputação.",
     },
@@ -568,7 +568,7 @@ export const blog = {
   heading: "Aprenda a crescer o seu alojamento",
   intro: "Partilhamos estratégias, guias práticos e insights do mercado de hotelaria.",
   cards: [
-    { title: "5 formas de reduzir dependência do Booking.com", cta: "Ler artigo →" },
+    { title: "5 formas de reduzir dependência das OTAs", cta: "Ler artigo →" },
     { title: "Google Hotel Ads vale a pena para pequenos alojamentos?", cta: "Ler artigo →" },
     { title: "Quanto custa realmente uma reserva Booking vs. direta?", cta: "Ler artigo →" },
   ],
@@ -599,7 +599,7 @@ export const useCasesPage = {
     intro:
       "Quando um hóspede pesquisa no Google, o seu website oficial aparece sempre com o melhor preço. É assim que fica a sua propriedade.",
     callout:
-      "A reserva direta é sempre o melhor preço para o seu hóspede. Quando pesquisam no Google, veem o seu website ao lado do Booking.com e do Expedia — e o seu preço ganha. É isto que configuramos para cada propriedade com quem trabalhamos.",
+      "A reserva direta é sempre o melhor preço para o seu hóspede. Quando pesquisam no Google, veem o seu website ao lado das OTAs — e o seu preço ganha. É isto que configuramos para cada propriedade com quem trabalhamos.",
   },
   booking: {
     label: "MOTOR DE RESERVAS",
@@ -631,6 +631,83 @@ export const contactCTA = {
 type FooterLink = { label: string; href: string };
 type FooterColumn = { title: string; links: FooterLink[]; text?: string[] };
 
+export const privacyPolicy = {
+  lastUpdated: "10 de maio de 2026",
+  sections: [
+    {
+      heading: "Quem é o responsável pelos seus dados",
+      paragraphs: [
+        "A Reserva Direta é a entidade responsável pelo tratamento dos dados pessoais recolhidos através deste website. Para qualquer questão relacionada com a sua privacidade, contacte-nos em agenciareservadireta@gmail.com.",
+      ],
+    },
+    {
+      heading: "Que dados recolhemos",
+      paragraphs: [
+        "Apenas recolhemos os dados que nos fornece voluntariamente através do formulário de contacto:",
+      ],
+      list: [
+        "Nome",
+        "Endereço de email",
+        "Número de telefone",
+        "Nome do alojamento (opcional)",
+        "Mensagem",
+      ],
+    },
+    {
+      heading: "Para que usamos os seus dados",
+      paragraphs: [
+        "Os dados são utilizados exclusivamente para responder ao seu pedido de contacto e, com a sua autorização, para o acompanhamento comercial subsequente. A base legal para este tratamento é o seu consentimento, manifestado ao submeter o formulário.",
+        "Não utilizamos os seus dados para marketing automatizado, perfis comerciais, ou qualquer finalidade não relacionada com o seu pedido inicial.",
+      ],
+    },
+    {
+      heading: "Onde guardamos os seus dados",
+      paragraphs: [
+        "As submissões do formulário são processadas pelo serviço Formspree (Estados Unidos), que opera ao abrigo das cláusulas contratuais-tipo aprovadas pela Comissão Europeia para transferências internacionais de dados.",
+        "Os contactos resultantes são geridos pela equipa interna em ferramentas de email padrão.",
+      ],
+    },
+    {
+      heading: "Quanto tempo guardamos os seus dados",
+      paragraphs: [
+        "Mantemos os seus dados pelo tempo estritamente necessário para responder ao seu pedido e, se aplicável, durante a relação comercial subsequente. Em caso de inatividade prolongada (24 meses), os dados são eliminados.",
+      ],
+    },
+    {
+      heading: "Os seus direitos",
+      paragraphs: [
+        "Ao abrigo do Regulamento Geral sobre a Proteção de Dados (RGPD), tem direito a:",
+      ],
+      list: [
+        "Aceder aos dados que temos sobre si",
+        "Solicitar a correção de dados incorretos",
+        "Solicitar a eliminação dos seus dados",
+        "Solicitar a portabilidade dos seus dados",
+        "Retirar o consentimento a qualquer momento",
+        "Apresentar uma reclamação à Comissão Nacional de Proteção de Dados (CNPD)",
+      ],
+    },
+    {
+      heading: "Cookies",
+      paragraphs: [
+        "Este site utiliza apenas cookies estritamente necessários ao seu funcionamento. Não usamos cookies de análise, rastreamento ou publicidade. Caso venhamos a integrar serviços que utilizem cookies não-essenciais, será solicitado o seu consentimento prévio.",
+      ],
+    },
+    {
+      heading: "Alterações a esta política",
+      paragraphs: [
+        "Podemos atualizar esta política para refletir mudanças nas nossas práticas ou requisitos legais. A data da última atualização aparece no topo desta página.",
+      ],
+    },
+    {
+      heading: "Contacto",
+      paragraphs: [
+        "Para exercer qualquer dos seus direitos ou esclarecer dúvidas, escreva-nos para agenciareservadireta@gmail.com.",
+      ],
+    },
+  ],
+};
+
 export const footer = {
   brand: "Reserva Direta",
   tagline:
@@ -651,6 +728,7 @@ export const footer = {
         { label: "A Nossa Solução", href: "/a-nossa-solucao" },
         { label: "Blog", href: "/#blog" },
         { label: "Contacto", href: "#contacto" },
+        { label: "Política de Privacidade", href: "/politica-privacidade" },
       ],
     },
   ] as FooterColumn[],

@@ -430,8 +430,8 @@ Order in `app/page.tsx`. Backgrounds alternate light-blue / white / cream to pre
 
 | Asset | Status | Path / notes |
 |---|---|---|
-| Hero image | ✅ delivered | `/public/hero/hero-bedroom.png`. Responsive: `aspect-[3/4]` + `max-w-md` on `lg`, full-width `aspect-[4/3]` below. |
-| Case study photos (×3) | 🟡 anonymous | `/public/case-studies/case-{1,2,3}.png` — temporary anonymous shots. Awaiting permission for real names + per-property metrics. |
+| Hero image | ✅ delivered | `/public/hero/hero-bedroom.webp`. Responsive: `aspect-[3/4]` + `max-w-md` on `lg`, full-width `aspect-[4/3]` below. |
+| Case study photos (×3) | 🟡 anonymous | `/public/case-studies/case-{1,2,3}.webp` — temporary anonymous shots. Awaiting permission for real names + per-property metrics. |
 | Blog featured images (×3) | ❌ placeholder | Still `picsum.photos`. Awaiting client. |
 | Team photos (Quem Somos) | ❌ pending | Awaiting client. |
 

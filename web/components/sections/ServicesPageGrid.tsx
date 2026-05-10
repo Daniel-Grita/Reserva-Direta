@@ -35,7 +35,7 @@ export default function ServicesPageGrid() {
                   />
                 </div>
                 <div className="p-6 lg:p-7">
-                  <h2 className="text-display-xs font-display text-navy mb-3">
+                  <h2 className="text-card-title font-display text-navy mb-3">
                     {card.title}
                   </h2>
                   <p className="text-body-sm font-body text-n-600">
@@ -44,7 +44,7 @@ export default function ServicesPageGrid() {
                   <Link
                     href={link.href}
                     {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    className="inline-flex items-center gap-1 text-body-sm font-body font-bold text-orange-text hover:gap-2 transition-all duration-base mt-4"
+                    className="inline-flex items-center gap-1 text-body-sm font-body font-bold text-navy hover:gap-2 transition-all duration-base mt-4"
                   >
                     {link.label} <span aria-hidden>→</span>
                   </Link>

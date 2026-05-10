@@ -3,13 +3,11 @@ import Tooltip from '@/components/ui/Tooltip';
 
 const GLOSSARY: Record<string, string> = {
   'Channel Manager':
-    'Sistema que sincroniza preços e disponibilidade entre o seu site e plataformas como Booking.com, Airbnb e Expedia.',
+    'Sistema que sincroniza preços e disponibilidade entre o seu site e as principais OTAs.',
   'Premier Connectivity Partner':
     'Distinção atribuída pela Booking.com aos parceiros tecnológicos com a melhor integração e fiabilidade.',
-  'Preferred Partner':
-    'Distinção da Expedia para parceiros tecnológicos com integração de elevada qualidade.',
   'OTAs':
-    'Online Travel Agencies — plataformas como Booking.com, Airbnb e Expedia que cobram comissão por cada reserva.',
+    'Online Travel Agencies — plataformas que intermediam reservas em troca de comissão por cada estadia.',
   'Google Hotel Ads':
     'Anúncios pagos do Google em que o seu alojamento aparece nas pesquisas de hotéis e os utilizadores reservam diretamente no seu site.',
   'PCI Compliant':
