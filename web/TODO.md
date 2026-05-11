@@ -50,7 +50,8 @@ Backlog of known fixes and follow-ups. Group by priority. Tick as you go.
 
 ## New pages
 
-- [x] `/quem-somos` — about page (AboutHero, AboutTeam, AboutValues, ContactCTA, Footer). Team photos shipped.
+- [x] `/quem-somos` — about page (AboutHero, **AboutTeamValues** [united section], ContactCTA, Footer). Team photos shipped.
+- [x] `/politica-privacidade` — RGPD-compliant privacy policy. Linked from Footer + CookieBanner.
 - [x] `/servicos` — services overview page (ServicesPageHero, ServicesPageGrid).
 - [x] `/a-nossa-solucao` — booking-engine deep dive (SolucaoHero, SolucaoStats, SolucaoSteps, SolucaoFeatures, SolucaoTrust).
 - [x] `/casos-de-uso` — real client showcase (UseCasesGoogle 3-col grid + UseCasesBooking vertical stack), each ending in a `StatCard` with count-up stat (−€10 / 1–2 weeks) and `text-highlight` punchline. Uses real screenshots in `public/use-cases/` (compressed to ~280–390 KB).
@@ -63,11 +64,39 @@ Backlog of known fixes and follow-ups. Group by priority. Tick as you go.
 ## Phase 2
 
 - [ ] **Storyblok CMS** for blog + case studies. (Two prior scaffolds removed — root-level on 2026-05-08, then a partial `web/` wiring on 2026-05-08. Phase 2 will start fresh.)
-- [ ] **Custom domain** on Vercel.
-- [ ] **Analytics** (Vercel Analytics or GA).
+- [ ] **Cloudflare Pages deployment** + custom domain. Site is already configured for it: `next.config.ts` `images.unoptimized: true`, `public/_headers` with HSTS + CSP + frame-deny, `CloudflareAnalytics` script wired but env-gated on `NEXT_PUBLIC_CF_BEACON_TOKEN`.
+- [ ] **Cloudflare Web Analytics** — flip the env var once a CF beacon token is provisioned.
 - [x] **Connect to GitHub.** Repo: `github.com/Daniel-Grita/Reserva-Directa`.
-- [x] **Vercel deployment.** Auto-deploys on push to `main`.
+- [x] **Vercel deployment.** Auto-deploys on push to `main` (current). Migrating to Cloudflare Pages.
 
 ---
 
-**Last updated:** 2026-05-08
+## Open follow-ups (out-of-band, can't be fixed in code)
+
+- [ ] **Rotate Storyblok token** in Storyblok dashboard. Token never committed to git, but lived in `.env.local` and was discussed in chat history. Treat as compromised.
+- [ ] **Confirm spam protection on Formspree form `mvzloknk`** (CAPTCHA / Akismet in Formspree dashboard).
+- [ ] **Replace placeholder images** with real client art: `SolucaoHero` photo (picsum), 2 blog covers (Unsplash), `AboutHero` photo (Unsplash). Drop into `/public/...` and update `lib/constants.ts`.
+- [ ] **Calendly URL** — "Agendar Reunião" still posts to `#contacto`; swap when client provides URL.
+
+---
+
+## 2026-05-10 batch (this session)
+
+Big audit + content + Cloudflare prep + security pass. Highlights:
+
+- **Audit fixes:** P0/P1 backlog cleared. Removed framer-motion (~80 KB). Hero/SolucaoHero/AboutHero/BlogPreview/CaseStudies converted to `next/image` or got proper `sizes` attrs. PNG → WebP across `/public` (4.6 MB → 327 KB, 93% reduction). 44 px touch targets on Footer socials + mobile nav. Stable list keys throughout. ESLint set-state-in-effect cleared with justified disables. `text-orange` → `text-orange-text` site-wide for AA contrast on body text.
+- **SEO + legal:** `app/robots.ts`, `app/sitemap.ts`, branded `not-found` / `error` / `global-error` pages. JSON-LD: `LocalBusiness` (layout), `Service` (`/servicos/[slug]`), `BreadcrumbList` (`Breadcrumbs` auto-prepends Início), `FAQPage` (FAQ). `/politica-privacidade` page + dismissible `CookieBanner`.
+- **Cloudflare prep:** `next.config.ts` `images.unoptimized: true`, `CloudflareAnalytics` (`next/script` + env-gated), `public/_headers` with HSTS + frame-deny + nosniff + Referrer-Policy + Permissions-Policy + CSP scoped to self/Formspree/CF Insights/Google Fonts.
+- **Security hardening:** `lib/jsonLd.ts` `safeJsonLd()` escapes `<` so JSON-LD strings can't break out of `<script>` — applied at all four call sites. Audit confirmed: no high-entropy secrets in repo, `.env.local` never tracked, no XSS surface beyond JSON-LD (now defended).
+- **Content + sub-page polish:**
+  - `/quem-somos` — `AboutTeam` + `AboutValues` united into `AboutTeamValues` (founders left, values as numbered manifesto right with hover/focus tie-line).
+  - `/servicos` — hero promoted with label eyebrow, soft radial blobs in the background, and clickable service-tag pills that anchor-scroll to cards.
+  - `/servicos/[slug]` — `ServiceProcess` rebuilt to mirror home `HowItWorks` (PROCESSO eyebrow + gradient connector rail + ring-cream circles); `ServiceIncluded` converted from flat checklist to 3-up `bg-light-blue` card grid with white check tiles.
+  - `BookingSystem` teaser — CTA moved below the widget; `BookingWidget` extracted to `components/ui/BookingWidget.tsx` and reused by `BookingSystem` + `SolucaoHero` (which floats it over the hero photo).
+  - `BlogPreview` — reduced to 2 articles with real titles + Unsplash covers; cards now carry `image: { src, alt }`.
+  - Site-wide copy: replaced Booking.com / Airbnb mentions with neutral "OTAs"; team cards trimmed to name + Fundador; Problem cards refactored to `− Receitas` / `+ Receitas`; Services swap CultBooking → Motor de Reserva.
+  - Footer Navegação column auto-grids to 2 cols when `> 4` links.
+
+---
+
+**Last updated:** 2026-05-10
