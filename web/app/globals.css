@@ -268,6 +268,14 @@ body {
 .hero-floats > *:nth-child(4) { animation-delay: 650ms, 1450ms; }
 .hero-floats > *:hover { animation-play-state: running, paused; }
 
+/* Stacked pair shown below 1440px — entrance only, no continuous float */
+.hero-stack > * {
+  opacity: 0;
+  animation: hero-card-in 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-stack > *:nth-child(1) { animation-delay: 400ms; }
+.hero-stack > *:nth-child(2) { animation-delay: 550ms; }
+
 /* ──────────────────────────────────────────────────────────
    Hero ambient blobs — slow opposing drift for atmosphere
    ────────────────────────────────────────────────────────── */
@@ -304,7 +312,8 @@ body {
     transform: none;
     animation: none;
   }
-  .hero-floats > * {
+  .hero-floats > *,
+  .hero-stack > * {
     opacity: 1;
     animation: none;
     transform: none;

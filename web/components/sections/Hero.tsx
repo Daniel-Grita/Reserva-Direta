@@ -7,30 +7,22 @@ const floatingImages = [
   {
     src: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=700&q=80',
     alt: 'Suite de hotel boutique com luz natural',
-    position: 'left-[7%] top-[24%]',
-    size: 'w-[255px] h-[335px]',
-    layer: 'z-10',
+    classes: 'left-[7%] top-[24%] w-[255px] h-[335px] z-10',
   },
   {
     src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=700&q=80',
     alt: 'Quarto de alojamento local minimalista',
-    position: 'left-[11%] top-[62%]',
-    size: 'w-[290px] h-[230px]',
-    layer: 'z-20',
+    classes: 'left-[11%] top-[62%] w-[290px] h-[230px] z-20',
   },
   {
     src: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=700&q=80',
     alt: 'Sala de estar moderna num alojamento turístico',
-    position: 'right-[7%] top-[20%]',
-    size: 'w-[310px] h-[240px]',
-    layer: 'z-10',
+    classes: 'right-[7%] top-[20%] w-[310px] h-[240px] z-10',
   },
   {
     src: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=700&q=80',
     alt: 'Quarto rústico com decoração contemporânea',
-    position: 'right-[15%] top-[44%]',
-    size: 'w-[240px] h-[310px]',
-    layer: 'z-20',
+    classes: 'right-[15%] top-[44%] w-[240px] h-[310px] z-20',
   },
 ];
 
@@ -46,28 +38,18 @@ export default function Hero() {
         className="hero-blob-b pointer-events-none absolute -bottom-32 -right-24 w-[36rem] h-[36rem] rounded-full bg-navy/8 blur-3xl"
       />
 
-      <div className="hero-floats hidden lg:block absolute inset-0 pointer-events-none">
+      <div className="hero-floats hidden min-[1440px]:block absolute inset-0 pointer-events-none">
         {floatingImages.map((img) => (
           <div
             key={img.src}
-            className={`group absolute pointer-events-auto ${img.position} ${img.size} ${img.layer}`}
+            className={`group absolute pointer-events-auto ${img.classes}`}
           >
-            <div className="w-full h-full rounded-card-lg bg-white p-2 shadow-card transition-[transform,box-shadow] duration-slow group-hover:shadow-card-hover group-hover:-translate-y-2 group-hover:scale-[1.02]">
-              <div className="relative w-full h-full rounded-card overflow-hidden">
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  sizes="320px"
-                  className="object-cover transition-transform duration-slow group-hover:scale-[1.04]"
-                />
-              </div>
-            </div>
+            <FloatCard src={img.src} alt={img.alt} sizes="320px" />
           </div>
         ))}
       </div>
 
-      <div className="relative h-full flex items-center justify-center px-6 sm:px-8 md:px-16 lg:px-section-x pt-[72px]">
+      <div className="relative h-full flex flex-col items-center justify-center gap-8 sm:gap-10 px-6 sm:px-8 md:px-16 lg:px-section-x pt-[72px]">
         <div className="hero-stagger max-w-3xl text-center space-y-6">
           <h1 className="text-display-md lg:text-display-lg font-display text-navy">
             <span className="block whitespace-pre-line">{hero.heading}</span>
@@ -87,7 +69,40 @@ export default function Hero() {
             </LinkButton>
           </div>
         </div>
+
+        <div className="hero-stack relative min-[1440px]:hidden w-full max-w-[420px] aspect-[20/7]">
+          <div className="group absolute left-0 top-0 w-[52%] aspect-video z-10">
+            <FloatCard
+              src={floatingImages[0].src}
+              alt={floatingImages[0].alt}
+              sizes="(max-width: 768px) 160px, 240px"
+            />
+          </div>
+          <div className="group absolute right-0 bottom-0 w-[52%] aspect-video z-20">
+            <FloatCard
+              src={floatingImages[2].src}
+              alt={floatingImages[2].alt}
+              sizes="(max-width: 768px) 160px, 240px"
+            />
+          </div>
+        </div>
       </div>
     </section>
+  );
+}
+
+function FloatCard({ src, alt, sizes }: { src: string; alt: string; sizes: string }) {
+  return (
+    <div className="w-full h-full rounded-card-lg bg-white p-2 shadow-card transition-[transform,box-shadow] duration-slow group-hover:shadow-card-hover group-hover:-translate-y-2 group-hover:scale-[1.02]">
+      <div className="relative w-full h-full rounded-card overflow-hidden">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes={sizes}
+          className="object-cover transition-transform duration-slow group-hover:scale-[1.04]"
+        />
+      </div>
+    </div>
   );
 }

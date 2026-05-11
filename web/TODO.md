@@ -20,7 +20,7 @@ Backlog of known fixes and follow-ups. Group by priority. Tick as you go.
 ## P2 — Polish
 
 - [x] **Form a11y + recovery.** `aria-live="polite"` status region, email fallback (`agenciareservadireta@gmail.com`) in error state, `+351 XXX XXX XXX` mask on phone, orange asterisks on all four required labels, `comentario` now required, Formspree `_gotcha` honeypot. WhatsApp fallback deferred — no number available.
-- [~] **CTAs differentiation.** BookingSystem CTA → `/a-nossa-solucao`. Service cards → `/servicos/[slug]` ✓. "Agendar Reunião" → Calendly still blocked: no Calendly URL.
+- [~] **CTAs differentiation.** BookingSystem CTA → `/a-nossa-solucao` ✓. Service cards → `/servicos` (navy CTA card) ✓. "Agendar Reunião" → Calendly still blocked: no Calendly URL.
 - [x] **Footer Navegação column missing pages.** Added `/a-nossa-solucao` (`/quem-somos` was already present).
 - [x] **Footer "Lisboa, Portugal" link is `href="#"`** (dead). Now rendered as plain text via a `text[]` field on the Contacto column.
 - [x] **Orange label contrast (systemic).** Introduced `--color-orange-text: #A8580A` (4.95:1 on white, passes WCAG AA). Renamed all `text-orange` → `text-orange-text` site-wide (18 files, includes section eyebrows, navbar active state, link CTAs, checkmark icons, FAQ accordion glyphs, stat cards). Brand `--color-orange` (`bg-orange`) preserved for fills, button surfaces, focus rings, and the `.text-highlight` decorative sweep.
@@ -55,7 +55,7 @@ Backlog of known fixes and follow-ups. Group by priority. Tick as you go.
 - [x] `/servicos` — services overview page (ServicesPageHero, ServicesPageGrid).
 - [x] `/a-nossa-solucao` — booking-engine deep dive (SolucaoHero, SolucaoStats, SolucaoSteps, SolucaoFeatures, SolucaoTrust).
 - [x] `/casos-de-uso` — real client showcase (UseCasesGoogle 3-col grid + UseCasesBooking vertical stack), each ending in a `StatCard` with count-up stat (−€10 / 1–2 weeks) and `text-highlight` punchline. Uses real screenshots in `public/use-cases/` (compressed to ~280–390 KB).
-- [x] `/servicos/[slug]` — 5 service detail pages (branding, website, marketing-digital, tecnologia, fidelizacao). Pattern: hero · what's included · how it works · FAQ · contact CTA.
+- [x] `/servicos/[slug]` — ~~5 service detail pages~~ **Deleted 2026-05-11** — content consolidated into `/servicos` as alternating sections (`ServicesPageSections`).
 - [ ] `/blog` — listing page (3-col grid).
 - [ ] `/blog/[slug]` — article template.
 
@@ -75,7 +75,7 @@ Backlog of known fixes and follow-ups. Group by priority. Tick as you go.
 
 - [ ] **Rotate Storyblok token** in Storyblok dashboard. Token never committed to git, but lived in `.env.local` and was discussed in chat history. Treat as compromised.
 - [ ] **Confirm spam protection on Formspree form `mvzloknk`** (CAPTCHA / Akismet in Formspree dashboard).
-- [ ] **Replace placeholder images** with real client art: `SolucaoHero` photo (picsum), 2 blog covers (Unsplash), `AboutHero` photo (Unsplash). Drop into `/public/...` and update `lib/constants.ts`.
+- [ ] **Replace placeholder images** with real client art: 4× Hero floating cards (Unsplash hotel rooms in `constants.ts` `floatingImages`), `SolucaoHero` photo (picsum), 2 blog covers (Unsplash), `AboutHero` photo (Unsplash). Drop into `/public/...` and update `lib/constants.ts`.
 - [ ] **Calendly URL** — "Agendar Reunião" still posts to `#contacto`; swap when client provides URL.
 
 ---
@@ -99,4 +99,17 @@ Big audit + content + Cloudflare prep + security pass. Highlights:
 
 ---
 
-**Last updated:** 2026-05-10
+## 2026-05-11 batch (this session)
+
+Hero rework + `/servicos` consolidation + component inventory:
+
+- **Hero floating cards**: 4 asymmetric Unsplash hotel-room images at `lg+`. CSS dual-animation (`hero-card-in` entrance → `hero-float` loop). Hover pauses float. Ambient blob drift on both bg blobs. All reduced-motion safe.
+- **`/servicos/[slug]` routes deleted**: 5 detail pages merged into `/servicos` alternating sections (`ServicesPageSections`). Deleted `ServicesPageGrid`, `ServiceDetailHero`, `ServiceIncluded`, `ServiceProcess`, `/servicos/[slug]/page.tsx`. Sitemap simplified to 5 static pages.
+- **Service cards on home page**: 5 white cards converted `<Link>` → `<div>` (no link). Only navy CTA card links to `/servicos`.
+- **`LinkButton` `external` prop**: renders `target="_blank" rel="noopener noreferrer"`.
+- **Button variant rule**: use `variant="dark"` on `bg-light-blue` backgrounds.
+- **Component inventory**: `DESIGN_SYSTEM.md` Section 13 — 35 components tagged + Quick decision guide.
+
+---
+
+**Last updated:** 2026-05-11
