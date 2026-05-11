@@ -34,7 +34,7 @@ export default function SolucaoSteps() {
         </ol>
 
         <div className="reveal-up">
-          <LinkButton href={solucaoPage.primaryCta.href} variant="primary">
+          <LinkButton href={solucaoPage.primaryCta.href} variant="dark">
             {solucaoPage.primaryCta.label}
           </LinkButton>
         </div>

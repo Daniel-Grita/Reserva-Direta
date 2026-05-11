@@ -439,4 +439,103 @@ See `web/TODO.md` for the live backlog.
 
 ---
 
-**Last reviewed:** 2026-04-27
+## 13. Component inventory
+
+Every `.tsx` under `components/`, tagged so future work knows when to reuse vs. build new. All 35 components are currently in use — there are no orphans.
+
+**Tags:**
+- 🧩 **REUSABLE** — UI primitive, designed to be imported by many call sites.
+- 🏗️ **LAYOUT** — site-wide chrome mounted on most/all pages.
+- 📄 **PAGE-SECTION** — full-width section bound to one specific page. Don't reuse elsewhere; clone the file and adapt.
+- 🔁 **CROSS-PAGE SECTION** — full-width section reused across multiple pages.
+- 🧱 **SECTION HELPER** — composable card/tile used inside one or two parent sections.
+
+### 13.1 Reusable UI primitives (`components/ui/`)
+
+| Component | Tag | Use when… |
+|---|---|---|
+| `Button.tsx` (`Button` + `LinkButton`) | 🧩 | Any CTA. Variants: `primary` (orange, fill — main page CTAs on light bg), `dark` (navy fill — CTAs on `bg-light-blue` sections, exit/secondary CTAs), `secondary` (white + navy border — secondary on light surfaces), `accent` (orange + white text — on navy/dark surfaces), `ghost` (text-only). **Rule:** on `bg-light-blue` sections, use `dark`. |
+| `SectionHeader.tsx` | 🧩 | The label + heading + intro pattern at the top of any section. Supports `align="center"` and `onDark`. Don't roll your own — always use this. |
+| `ServiceIcon.tsx` | 🧩 | All inline SVG icons (`palette`, `globe`, `phone`, `bolt`, `tools`, `handshake`, `eye`, `trendingUp`, `monitor`, `lock`, `calendar`, `star`, `check`). Add new icons here, not inline. |
+| `Tooltip.tsx` | 🧩 | Wrap jargon with `withGlossary(text)` from `lib/glossary.tsx` — Tooltip is auto-applied via that helper. Don't import Tooltip directly; extend the glossary instead. |
+| `StatTile.tsx` | 🧩 | Small animated count-up stat tile (4-up grid pattern). Currently consumed by `SolucaoStats`. Use for any "row of count-up stats" need. |
+| `BookingWidget.tsx` | 🧩 | Reusable booking-system mockup (date pickers + price + CTA). Consumed by `BookingSystem` (home teaser) and `SolucaoHero`. Use anywhere you need the visual artifact of the product. |
+| `ScrollProgress.tsx` | 🧩 | Fixed orange top progress bar. rAF-throttled, ref-based (no React state). Mount once per long sub-page (currently only `/a-nossa-solucao`). |
+| `PageTOC.tsx` | 🧩 | Fixed left-rail TOC at `2xl` breakpoint. Pass `items={[{id, label}]}`. Consumes `useActiveSection`. Use on long sub-pages with named section IDs. |
+| `CookieBanner.tsx` | 🧩 | Dismissible RGPD banner. Mounted globally — generally not imported again. |
+
+### 13.2 Layout & SEO (`components/`, `components/seo/`)
+
+| Component | Tag | Use when… |
+|---|---|---|
+| `Navbar.tsx` | 🏗️ | Fixed 72px navbar. Mounted on every page. Don't fork. |
+| `Footer.tsx` | 🏗️ | 3-column footer. Mounted on every page. Don't fork. |
+| `seo/Breadcrumbs.tsx` | 🏗️ | Renders SEO breadcrumb JSON-LD (auto-prepends "Início"). Mount at the top of every sub-page with `items={[{name, url}]}`. |
+| `seo/CloudflareAnalytics.tsx` | 🏗️ | Cloudflare analytics script, env-gated. Mounted in root layout — don't import elsewhere. |
+
+### 13.3 Cross-page sections (`components/sections/`)
+
+| Component | Tag | Use when… |
+|---|---|---|
+| `ContactCTA.tsx` | 🔁 | Contact form + founder intro strip. Already mounted on home, `/a-nossa-solucao`, `/servicos`, `/quem-somos`, `/casos-de-uso`. Use it as the closing CTA on any new page; don't build a new form. |
+| `FAQ.tsx` | 🔁 | Accordion FAQ. Reuse with `items`, `label`, `heading`, `idPrefix` props for per-page FAQs. (Note: `ServicesPageSections` reimplements the accordion inline because `FAQ` is a full-section component — its own `<section>` wrapper, `SectionHeader`, and JSON-LD FAQPage script don't fit inside a subsection. If a third caller needs accordion-only behavior, extract `Accordion` into `components/ui/`.) |
+
+### 13.4 Page sections — home (`/`)
+
+All single-use; do not import elsewhere. Order: Navbar → Hero → Problem → BookingSystem → Services → HowItWorks → CaseStudies → BlogPreview → FAQ → ContactCTA → Footer.
+
+| Component | Tag | Description |
+|---|---|---|
+| `Hero.tsx` | 📄 | Light-blue 2-col hero with bedroom photo + hero-stagger reveal. |
+| `Problem.tsx` | 📄 | 2-col comparison panels + count-up "−0% → −25%". |
+| `BookingSystem.tsx` | 📄 | Single-column teaser: heading + 1-line copy + `BookingWidget` mockup + CTA → `/a-nossa-solucao`. |
+| `Services.tsx` | 📄 | Cream bg, 6-tile grid. 5 service cards link to `/servicos#${slug}`, 1 navy CTA card → `/servicos`. |
+| `HowItWorks.tsx` | 📄 | Horizontal stepper with orange gradient connector rail. |
+| `CaseStudies.tsx` | 📄 | Light-blue bg, image-led case study cards. |
+| `BlogPreview.tsx` | 📄 | Cream bg, 2-up article preview cards. |
+
+### 13.5 Page sections — `/a-nossa-solucao`
+
+Single-use sections for the solution page. Order: SolucaoHero → SolucaoStats → SolucaoSteps → SolucaoFeatures → SolucaoTrust → ContactCTA.
+
+| Component | Tag | Description |
+|---|---|---|
+| `SolucaoHero.tsx` | 📄 | Hero with `BookingWidget` floated over a background photo. |
+| `SolucaoStats.tsx` | 📄 | 4× `StatTile` count-up grid. |
+| `SolucaoSteps.tsx` | 📄 | "Como funciona" steps + primary CTA. |
+| `SolucaoFeatures.tsx` | 📄 | Feature grid with `ServiceIcon`s + jargon tooltips via `withGlossary`. |
+| `SolucaoTrust.tsx` | 📄 | Trust badges section. |
+
+### 13.6 Page sections — `/servicos`, `/quem-somos`, `/casos-de-uso`
+
+| Component | Tag | Description |
+|---|---|---|
+| `ServicesPageHero.tsx` | 📄 | `/servicos` hero — label + heading + intro + clickable service-tag pills that anchor-scroll to each section. |
+| `ServicesPageSections.tsx` | 📄 | `/servicos` body — one full section per service (eyebrow + heading + intro + "O que está incluído" grid + per-service FAQ + CTA). Alternates `bg-white` / `bg-light-blue`. |
+| `AboutHero.tsx` | 📄 | `/quem-somos` hero. |
+| `AboutTeamValues.tsx` | 📄 | `/quem-somos` united section — founders left, values manifesto right, hover tie-line. |
+| `UseCasesGoogle.tsx` | 📄 | `/casos-de-uso` 3-col Google use-case cards. |
+| `UseCasesBooking.tsx` | 📄 | `/casos-de-uso` vertical Booking.com use-case cards. |
+
+### 13.7 Section helpers
+
+Used internally by one or two parent sections, not for direct page composition.
+
+| Component | Tag | Used by |
+|---|---|---|
+| `sections/UseCaseCard.tsx` | 🧱 | `UseCasesGoogle`, `UseCasesBooking`. Image + title + body card. |
+| `sections/StatCard.tsx` | 🧱 | `UseCasesGoogle`, `UseCasesBooking`. Large stat number + label + body, with side rule. **Don't confuse with `ui/StatTile.tsx`** — `StatTile` is a small count-up tile, `StatCard` is a large prose+number card. |
+
+### 13.8 Quick decision guide
+
+- **Adding a CTA?** → `LinkButton` / `Button` from `components/ui/Button.tsx`. Pick variant by background (see 13.1).
+- **Starting a new section?** → New file in `components/sections/`. Open with `<SectionHeader>`. Pull copy from `lib/constants.ts`. Tag it 📄 (single-use) unless you genuinely plan to reuse it.
+- **Adding an icon?** → Extend `ServiceIcon.tsx`. Don't inline SVG in sections.
+- **Adding a closing contact form?** → Import `ContactCTA`. Don't roll your own.
+- **Adding a long sub-page?** → Mount `<ScrollProgress />` once, plus `<PageTOC items={...} />` with section IDs. Reuse `useActiveSection` (don't reimplement).
+- **Jargon needs a tooltip?** → Add the term to `lib/glossary.tsx`, then wrap copy with `withGlossary(text)`. Don't import `Tooltip` directly.
+- **Need a count-up stat?** → 4-up tile row → `StatTile`. Big stat + prose card → `StatCard`. Underlying primitive is `lib/useCountUp.ts`.
+
+---
+
+**Last reviewed:** 2026-05-11

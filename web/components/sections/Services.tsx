@@ -28,10 +28,9 @@ export default function Services() {
 
         <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.cards.map((card) => (
-            <Link
+            <div
               key={card.slug}
-              href={`/servicos/${card.slug}`}
-              className="group bg-white border border-n-200 rounded-card p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-slow flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2"
+              className="bg-white border border-n-200 rounded-card p-6 shadow-card flex flex-col"
             >
               <div className="w-10 h-10 rounded-full bg-cream flex items-center justify-center mb-4 text-navy">
                 <ServiceIcon name={card.icon} className="w-5 h-5" />
@@ -39,14 +38,10 @@ export default function Services() {
               <h3 className="text-card-title font-display text-navy mb-2 leading-tight">
                 {card.title}
               </h3>
-              <p className="text-body-sm font-body text-n-600 flex-1 mb-4">
+              <p className="text-body-sm font-body text-n-600 flex-1">
                 {card.description}
               </p>
-              <span className="text-button font-body font-bold text-navy inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-[gap] duration-base">
-                {services.cta}
-                <ArrowRightIcon className="w-3.5 h-3.5" />
-              </span>
-            </Link>
+            </div>
           ))}
 
           <Link

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import ServicesPageHero from '@/components/sections/ServicesPageHero';
-import ServicesPageGrid from '@/components/sections/ServicesPageGrid';
+import ServicesPageSections from '@/components/sections/ServicesPageSections';
 import ContactCTA from '@/components/sections/ContactCTA';
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/seo/Breadcrumbs';
@@ -18,7 +18,7 @@ export default function ServicosPage() {
       <Breadcrumbs items={[{ name: 'Serviços', url: '/servicos' }]} />
       <Navbar />
       <ServicesPageHero />
-      <ServicesPageGrid />
+      <ServicesPageSections />
       <ContactCTA />
       <Footer />
     </main>

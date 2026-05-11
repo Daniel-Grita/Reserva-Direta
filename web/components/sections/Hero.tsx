@@ -17,7 +17,7 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
-            <LinkButton href={hero.cta1.href} variant="primary">
+            <LinkButton href={hero.cta1.href} variant="dark">
               {hero.cta1.label}
             </LinkButton>
             <LinkButton href={hero.cta2.href} variant="secondary">

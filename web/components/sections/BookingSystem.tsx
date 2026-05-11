@@ -28,7 +28,7 @@ export default function BookingSystem() {
           <BookingWidget />
 
           <div className="mt-10">
-            <LinkButton href="/a-nossa-solucao" variant="primary">
+            <LinkButton href="/a-nossa-solucao" variant="dark">
               Ver como funciona
             </LinkButton>
           </div>
