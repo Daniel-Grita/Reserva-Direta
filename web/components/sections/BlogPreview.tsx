@@ -1,16 +1,38 @@
-'use client';
-
 import { blog } from '@/lib/constants';
 import SectionHeader from '../ui/SectionHeader';
 import { LinkButton } from '../ui/Button';
-import { useInView } from '@/lib/useInView';
 import { withHighlight } from '@/lib/highlight';
+import { client } from '@/sanity/lib/client';
+import { POSTS_QUERY, PostSummary, BLOG_FALLBACK_IMAGE } from '@/sanity/lib/queries';
+import Link from 'next/link';
 
-export default function BlogPreview() {
-  const [ref, inView] = useInView<HTMLElement>();
+type ArticleCard = {
+  _id?: string;
+  title: string;
+  slug?: string;
+  image: { src: string; alt: string };
+};
+
+export default async function BlogPreview() {
+  let posts: PostSummary[] = [];
+
+  try {
+    posts = await client.fetch(POSTS_QUERY);
+  } catch (err) {
+    console.error('Error fetching blog posts:', err instanceof Error ? err.message : err);
+  }
+
+  const articles: ArticleCard[] = posts.length > 0
+    ? posts.slice(0, 2).map((post) => ({
+        _id: post._id,
+        title: post.title,
+        slug: post.slug.current,
+        image: { src: post.imageUrl ?? BLOG_FALLBACK_IMAGE, alt: post.title },
+      }))
+    : blog.cards.map((card) => ({ title: card.title, image: card.image }));
 
   return (
-    <section ref={ref} data-reveal={inView} id="blog" className="bg-cream py-section-y">
+    <section id="blog" className="bg-cream py-section-y">
       <div className="section-container">
         <div className="reveal-up">
           <SectionHeader
@@ -22,10 +44,10 @@ export default function BlogPreview() {
         </div>
 
         <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          {blog.cards.map((article) => (
+          {articles.map((article, idx) => (
             <div
-              key={article.title}
-              className="bg-white border border-n-200 rounded-card overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-slow"
+              key={article._id ?? `fallback-${idx}`}
+              className="bg-white border border-n-200 rounded-card overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-[transform,box-shadow] duration-slow"
             >
               <div className="w-full aspect-[16/9] bg-n-300 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -41,13 +63,22 @@ export default function BlogPreview() {
                 <h3 className="text-card-title font-display text-navy mb-3 leading-tight">
                   {article.title}
                 </h3>
-                <span
-                  aria-disabled="true"
-                  className="text-button font-body font-bold text-n-400 cursor-not-allowed select-none"
-                  title="Em breve"
-                >
-                  {article.cta}
-                </span>
+                {article.slug ? (
+                  <Link
+                    href={`/blog/${article.slug}`}
+                    className="text-button font-body font-bold text-navy hover:text-n-600 transition-colors"
+                  >
+                    Ler artigo →
+                  </Link>
+                ) : (
+                  <span
+                    aria-disabled="true"
+                    className="text-button font-body font-bold text-n-400 cursor-not-allowed select-none"
+                    title="Em breve"
+                  >
+                    Ler artigo →
+                  </span>
+                )}
               </div>
             </div>
           ))}

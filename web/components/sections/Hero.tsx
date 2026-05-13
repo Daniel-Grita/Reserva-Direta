@@ -39,12 +39,12 @@ export default function Hero() {
       />
 
       <div className="hero-floats hidden min-[1440px]:block absolute inset-0 pointer-events-none">
-        {floatingImages.map((img) => (
+        {floatingImages.map((img, idx) => (
           <div
             key={img.src}
             className={`group absolute pointer-events-auto ${img.classes}`}
           >
-            <FloatCard src={img.src} alt={img.alt} sizes="320px" />
+            <FloatCard src={img.src} alt={img.alt} sizes="320px" priority={idx < 2} />
           </div>
         ))}
       </div>
@@ -76,6 +76,7 @@ export default function Hero() {
               src={floatingImages[0].src}
               alt={floatingImages[0].alt}
               sizes="(max-width: 768px) 160px, 240px"
+              priority
             />
           </div>
           <div className="group absolute right-0 bottom-0 w-[52%] aspect-video z-20">
@@ -91,7 +92,7 @@ export default function Hero() {
   );
 }
 
-function FloatCard({ src, alt, sizes }: { src: string; alt: string; sizes: string }) {
+function FloatCard({ src, alt, sizes, priority }: { src: string; alt: string; sizes: string; priority?: boolean }) {
   return (
     <div className="w-full h-full rounded-card-lg bg-white p-2 shadow-card transition-[transform,box-shadow] duration-slow group-hover:shadow-card-hover group-hover:-translate-y-2 group-hover:scale-[1.02]">
       <div className="relative w-full h-full rounded-card overflow-hidden">
@@ -100,6 +101,7 @@ function FloatCard({ src, alt, sizes }: { src: string; alt: string; sizes: strin
           alt={alt}
           fill
           sizes={sizes}
+          priority={priority}
           className="object-cover transition-transform duration-slow group-hover:scale-[1.04]"
         />
       </div>

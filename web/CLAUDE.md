@@ -12,32 +12,34 @@ Marketing landing page for **Reserva Direta**, a Portuguese agency helping hotel
 
 ---
 
-## Current state (2026-05-11)
+## Current state (2026-05-13)
 
-All 10 landing-page sections built + 4 sub-pages live (`/quem-somos`, `/servicos`, `/a-nossa-solucao`, `/casos-de-uso`). The `/servicos/[slug]` per-service detail pages were consolidated into full-page alternating sections on `/servicos` (2026-05-11).
+All 10 landing-page sections built + 6 sub-pages live (`/quem-somos`, `/servicos`, `/a-nossa-solucao`, `/casos-de-uso`, `/blog`, `/blog/[slug]`). The `/servicos/[slug]` per-service detail pages were consolidated into full-page alternating sections on `/servicos` (2026-05-11). Sanity CMS is live and powering the blog.
 
 | # | Section | File | Notes |
 |---|---|---|---|
 | 0 | Navbar | `components/Navbar.tsx` | Fixed, 72px, shadow-nav. 3 links + primary CTA "Agendar Reunião". `useActiveSection` orange underline. |
-| 1 | Hero | `components/sections/Hero.tsx` | Light-blue bg, `h-[88vh]`. **4 asymmetric floating image cards** at `lg+` (hotel room photos from Unsplash — replace with real client photos). Centered heading split across two `<span>` elements from `hero.heading` + `hero.headingSecondary`. CSS-only entrance + continuous float + hover-pause + ambient blob drift. |
+| 1 | Hero | `components/sections/Hero.tsx` | Light-blue bg, `h-[88vh]`. **Two layouts:** ≥1440px — 4 absolute floating image cards (`hero-floats`) with entrance + continuous float + hover-pause; <1440px — 2 overlapping 16:9 cards (`hero-stack`) below the CTAs, width-matched to button row. Unsplash hotel rooms — replace with real client photos. Heading split across `hero.heading` + `hero.headingSecondary`. Ambient blob drift. All animations CSS-only, reduced-motion safe. |
 | 2 | Problem | `components/sections/Problem.tsx` | White bg, 2-col comparison panels. Count-up `−0% → −25%` snap on enter (`useCountUp`). |
 | 3 | BookingSystem | `components/sections/BookingSystem.tsx` | **Now a teaser** — single column: heading + 1-line copy + shared `BookingWidget` mockup + "Ver como funciona" CTA below the widget → `/a-nossa-solucao`. Trust badges + 6 feature cards moved exclusively to `/a-nossa-solucao`. |
-| 4 | Services | `components/sections/Services.tsx` | Cream bg. 6-tile 3-col grid: 5 white `<div>` cards (no link) + 1 navy CTA card `<Link>` → `/servicos`. Service cards lost the "Saber mais →" affordance — clicking goes nowhere. |
+| 4 | Services | `components/sections/Services.tsx` | Cream bg. 6-tile 3-col grid: 5 white `<div>` cards (no link) + 1 navy CTA card `<Link>` → `/servicos`. All cards have `hover:-translate-y-1 hover:shadow-card-hover` lift animation. |
 | 5 | HowItWorks | `components/sections/HowItWorks.tsx` | White bg. Horizontal stepper, orange gradient rail. |
 | 6 | CaseStudies | `components/sections/CaseStudies.tsx` | Light-blue bg. Image-led cards, real anonymous property photos. |
-| 7 | BlogPreview | `components/sections/BlogPreview.tsx` | Cream bg. 2 article cards in a 2-up grid with Unsplash cover photos (16/9). Cards carry `image: { src, alt }` in `lib/constants.ts`; CTA disabled until /blog ships. |
-| 8 | FAQ | `components/sections/FAQ.tsx` | White bg. 7-item accordion, multi-open with "Expandir todas / Recolher todas". Full a11y. |
+| 7 | FAQ | `components/sections/FAQ.tsx` | White bg. 7-item accordion, multi-open with "Expandir todas / Recolher todas". Full a11y. |
+| 8 | BlogPreview | `components/sections/BlogPreview.tsx` | Cream bg. 2 article cards in a 2-up grid with Unsplash cover photos (16/9). Cards carry `image: { src, alt }` in `lib/constants.ts`; CTA links to /blog (Sanity-powered). |
 | 9 | ContactCTA | `components/sections/ContactCTA.tsx` | Navy bg. **`FoundersIntro` strip** above the form (founder avatars + names + mailto). White card, gray inputs, orange submit. Posts to Formspree. |
 | 10 | Footer | `components/Footer.tsx` | Footer-bg, 3-column horizontal. |
 
-Section order in `app/page.tsx`: Navbar → Hero → Problem → BookingSystem → Services → HowItWorks → CaseStudies → BlogPreview → FAQ → ContactCTA → Footer.
+Section order in `app/page.tsx`: Navbar → Hero → Problem → BookingSystem → Services → HowItWorks → CaseStudies → FAQ → BlogPreview → ContactCTA → Footer.
 
 ### Sub-page details
 
 - `/a-nossa-solucao` — `SolucaoHero` → `SolucaoStats` → `SolucaoSteps` → `SolucaoFeatures` → `SolucaoTrust` → `ContactCTA`. Section IDs: `hero`, `resultados`, `como-funciona`, `funcionalidades`, `confianca`, `contacto`. Wires `<ScrollProgress />` (top orange bar, rAF-throttled, ref-based) + `<PageTOC items={...} />` (fixed left rail, `2xl`-only, consumes `useActiveSection`).
 - `/servicos` — `ServicesPageHero` (label eyebrow + heading + intro + clickable service-tag pills) → **`ServicesPageSections`** (alternating `bg-white`/`bg-light-blue` full-width sections, one per service, with `id={slug}` + `scroll-mt-24`, included items grid, FAQ accordion, branding-only portfolio teaser) → `ContactCTA`. **Deleted:** `ServicesPageGrid`, `ServiceDetailHero`, `ServiceIncluded`, `ServiceProcess`, `/servicos/[slug]/page.tsx`.
 - `/casos-de-uso` — `UseCasesGoogle` (3-col) + `UseCasesBooking` (vertical stack). Real screenshots in `public/use-cases/`.
-- `/quem-somos` — `AboutHero` · `AboutTeamValues` (single united section: founders left, values as numbered manifesto right with hover tie-line) · `ContactCTA` · `Footer`.
+- `/quem-somos` — `AboutHero` · `AboutTeamValues` (founders in a horizontal 2-col row with `bg-white p-2` framed photos at `aspect-[5/4]`; values as 3 horizontal white cards with icon + title + description, `hover:-translate-y-1` lift) · `ContactCTA` · `Footer`.
+- `/blog` — navy hero strip + cream 3-col card grid pulling from Sanity (`POSTS_QUERY`). Empty state gracefully handled.
+- `/blog/[slug]` — contained `aspect-[16/9]` image with `rounded-card-lg`, 780px centered column, category pills, title, meta strip (date · read time · author), `PortableText` body, `ScrollProgress` bar. Static params via `generateStaticParams`.
 - `/politica-privacidade` — RGPD-compliant privacy policy. Linked from Footer + `CookieBanner`.
 
 ---
@@ -89,7 +91,7 @@ Site-wide scroll-reveal pattern. SSR-safe, no Framer Motion.
   - `.reveal-up` — single fade-up element
   - `.reveal-stagger` — children stagger in (60ms cadence, up to 8 children, then a flat tail)
 - **Hero exception:** `.hero-stagger` runs on initial page load (no observer needed — above the fold).
-- **Hero floating images:** `.hero-floats > *` composes two CSS animations: `hero-card-in` (800ms entrance) + `hero-float` (6s infinite drift). Fill-modes `both, none` sequence them without transform conflicts. Per-card delays via `nth-child`. `.hero-floats > *:hover` pauses only the float (`animation-play-state: running, paused`). Ambient blobs use `.hero-blob-a/b` for slow opposing drift (14s / 16s).
+- **Hero floating images:** `.hero-floats > *` (≥1440px) composes two CSS animations: `hero-card-in` (800ms entrance) + `hero-float` (6s infinite drift). Fill-modes `both, none` sequence them without transform conflicts. Per-card delays via `nth-child`. `.hero-floats > *:hover` pauses only the float. `.hero-stack > *` (<1440px) runs only `hero-card-in` — no float loop. Ambient blobs use `.hero-blob-a/b` for slow opposing drift (14s / 16s).
 - **Reduced-motion:** `@media (prefers-reduced-motion: reduce)` disables all of it; everything renders static.
 - **Highlight system:** `.text-highlight` (CSS in `globals.css`) is an orange highlighter sweep keyed off `[data-reveal="true"]` for observer-driven sections, and statically full inside `.hero-stagger` for the above-the-fold Hero. Use the `withHighlight(text, phrase)` helper from `lib/highlight.tsx` to wrap a substring. Apply one phrase per main paragraph per section (see Hero, Problem 3 paragraphs, BookingSystem, Services, CaseStudies, BlogPreview, FAQ).
 - **Count-up:** shared hook at `lib/useCountUp.ts` — `useCountUp(target, run, { duration?, startDelay? })`. Used by Problem (signature `−0% → −25%` snap) and BookingSystem (4 stat tiles, sequenced with `startDelay = 700 + index * 140`). Ease-out cubic, respects `prefers-reduced-motion`.
@@ -130,29 +132,35 @@ Landing page + 4 sub-pages live (`/servicos/[slug]` routes deleted — content m
 ### A. Open follow-ups (unblocked)
 - **Calendly URL** — "Agendar Reunião" still posts to `#contacto`; swap to Calendly when client provides URL.
 - **Real client images** — Hero floating cards (4 × Unsplash hotel rooms), `SolucaoHero` photo (picsum), blog covers (Unsplash), `AboutHero` photo (Unsplash) all flagged with TODO. Replace into `/public/...` and update `lib/constants.ts` when client supplies.
-- **Rotate Storyblok token** in Storyblok dashboard — never committed to git, but lived in `.env.local` and was discussed in chat history. Treat as compromised.
+- ~~Storyblok token~~ — dropped in favour of Sanity, no rotation needed.
 - **Confirm spam protection on Formspree form `mvzloknk`** (CAPTCHA / Akismet in Formspree dashboard).
 
 ### B. New pages remaining
-1. **`/blog`** — listing page.
-2. **`/blog/[slug]`** — article template.
+~~1. `/blog` — listing page.~~
+~~2. `/blog/[slug]` — article template.~~
+Both shipped (2026-05-13). Powered by Sanity CMS (`web/sanity/`).
 
 ### C. Phase 2
-Storyblok CMS for blog + case studies; custom domain + Cloudflare Pages deployment; Cloudflare Web Analytics (just set the `NEXT_PUBLIC_CF_BEACON_TOKEN` env var to activate the already-wired script).
+~~Sanity CMS for blog~~ — **done**. Case studies CMS integration still pending. Custom domain + Cloudflare Pages deployment; Cloudflare Web Analytics (just set the `NEXT_PUBLIC_CF_BEACON_TOKEN` env var to activate the already-wired script).
 
 ---
 
 ## Recent session highlights
 
 **2026-05-11 — Hero rework + /servicos consolidation + component inventory + button rules**
-- **Hero section rebuilt** (`components/sections/Hero.tsx`): light-blue bg, `h-[88vh] min-h-[640px]`. 4 asymmetric floating hotel-room image cards at `lg+` in a `hero-floats` container. Cards use `group`/`group-hover` for nested hover transforms (lift + shadow), CSS dual-animation for entrance (`hero-card-in`) + continuous float (`hero-float`) with `animation-fill-mode: both, none` to sequence without transform conflicts. Two ambient blobs (`hero-blob-a/b`) drift in opposite directions. All animations respect `prefers-reduced-motion`. Heading split: `hero.heading` (with `whitespace-pre-line`) + `hero.headingSecondary` as two `<span className="block">` inside `<h1>`. Subtitle rendered in 3 lines via `\n` + `whitespace-pre-line`.
+- **Hero section rebuilt** (`components/sections/Hero.tsx`): light-blue bg, `h-[88vh] min-h-[640px]`. Two responsive layouts:
+  - **≥1440px** — 4 asymmetric absolute cards (`hero-floats`). CSS dual-animation: `hero-card-in` entrance (800ms) then `hero-float` (6s loop), `animation-fill-mode: both, none` sequences them without transform conflict. Hover pauses float. Cards use `group`/`group-hover` for nested lift + shadow.
+  - **<1440px** — 2 overlapping 16:9 cards (`hero-stack`) below the CTAs. Width-matched to the button row via `w-full max-w-[420px]`. `aspect-[20/7]` container creates a diagonal stagger (`top-0 left-0` / `bottom-0 right-0`). Entrance-only `hero-card-in` — no continuous float.
+  - Two ambient blobs (`hero-blob-a/b`) drift in opposite directions (14s/16s). All CSS-only, reduced-motion safe.
+  - Heading split: `hero.heading` (with `whitespace-pre-line`) + `hero.headingSecondary` as two `<span className="block">`. Subtitle in 3 lines via `\n`.
+  - Shared `FloatCard` helper handles both layouts. Per-card layout data collapsed into a single `classes` field on `floatingImages`.
 - **`/servicos/[slug]` routes deleted** — 5 dynamic detail pages collapsed into alternating sections directly on `/servicos`. `ServicesPageGrid` replaced by `ServicesPageSections` (one `<section id={slug}>` per service, alternating `bg-white`/`bg-light-blue`, included items grid, inline FAQ accordion). Deleted: `ServicesPageGrid.tsx`, `ServiceDetailHero.tsx`, `ServiceIncluded.tsx`, `ServiceProcess.tsx`, `app/servicos/[slug]/page.tsx`. `app/sitemap.ts` simplified to 5 static pages.
 - **Service cards on home page unlinked** — 5 white cards converted from `<Link>` to `<div>` (no hover arrow). Only the navy CTA card remains clickable (`/servicos`).
 - **Branding portfolio teaser** — only the branding service section gets a portfolio CTA. Text: "Curioso para ver exemplos? Dê uma vista de olhos ao portfólio do nosso parceiro de design." Uses `external` prop on `LinkButton`.
 - **`LinkButton` `external` prop** — new `external?: boolean` on `LinkButtonProps`; renders `target="_blank" rel="noopener noreferrer"` when set.
 - **Button variant rule established** — on `bg-light-blue` section backgrounds, use `variant="dark"` (navy). Applied to `ServicesPageSections` branding CTA.
 - **Component inventory** — `web/DESIGN_SYSTEM.md` Section 13 added: 35 components listed with `REUSABLE`/`LAYOUT`/`PAGE-SECTION`/`CROSS-PAGE`/`SECTION HELPER` tags and a Quick decision guide (§13.8).
-- **`/simplify` pass** — `transition-all` → `transition-[transform,box-shadow]` on service included items; `brandingPortfolio` hoisted to module scope; per-service "Falar sobre…" CTAs removed entirely.
+- **`/simplify` passes** — `transition-all` → `transition-[transform,box-shadow]` on service items; `brandingPortfolio` hoisted to module scope; per-service CTAs removed; `will-change` dropped from one-shot stack animation; `position`/`size`/`layer` className fields collapsed to single `classes`.
 
 **2026-05-10 — Audit fixes + SEO/legal + Cloudflare prep + service page polish + security hardening**
 - Site-wide `/audit` pass cleared the P0/P1 backlog: framer-motion removed; `next/image` + WebP conversion (4.6 MB → 327 KB across hero/team/case-studies); 44 px touch targets on Footer socials and mobile nav; stable list keys; inline-style cleanup; `text-orange` → `text-orange-text` for AA contrast on body; full ESLint set-state-in-effect cleanup with justified disables.
@@ -168,11 +176,9 @@ Storyblok CMS for blog + case studies; custom domain + Cloudflare Pages deployme
   - `BlogPreview` — reduced to 2 articles with real titles + Unsplash covers; cards now carry `image: { src, alt }` in `constants.ts`.
 - Footer: Navegação column auto-grids to 2 cols when `> 4` links.
 
-**2026-05-08 — Storyblok fully removed (second pass) + BookingSystem teaser polish**
-- Deleted **all** Storyblok wiring: `web/lib/storyblok.js`, `@storyblok/react` from `web/package.json`, broken duplicate `Home`/`fetchData` in `app/page.tsx`, and `STORYBLOK_DELIVERY_API_TOKEN` from `web/.env.local` (token must be rotated in Storyblok — it lived in the repo).
+**2026-05-08 — CMS wiring removed + BookingSystem teaser polish**
+- Deleted all CMS wiring (previously Storyblok, previously Sanity). Phase 2 will use **Sanity** — start fresh inside `web/` when ready.
 - Also re-deleted the orphan root scaffold that had reappeared (`/node_modules`, `/package.json`, `/package-lock.json`).
-- Phase 2 will start fresh inside `web/` when ready.
-- CMS choice flipped from Sanity → **Storyblok** in `TODO.md` Phase 2 + `CLAUDE.md` active-scope.
 - `BookingSystem` teaser stays single-column at all breakpoints (text → CTA → widget). Earlier 2-col attempts at `lg`/`xl` cramped the heading and date fields; reverted. Added `whitespace-nowrap` to `DateField` values defensively.
 
 **2026-05-06 — landing-page polish + sub-page UX**
@@ -183,4 +189,12 @@ Storyblok CMS for blog + case studies; custom domain + Cloudflare Pages deployme
 - Service home cards now `<Link href="/servicos/${slug}">`. `services` exported `as const` so `card.icon` types narrow without casts.
 - `app/opengraph-image.tsx` (1200×630, navy gradient + orange accent) + `metadata.openGraph` + Twitter card. Static at build time (dropped edge runtime).
 
-**Last updated:** 2026-05-11
+**2026-05-13 — Sanity CMS blog + Quem Somos redesign + card animations**
+- **Sanity CMS integrated** (`web/sanity/`). Project ID `vsbvopiy`, dataset `blog-post` (public). Client in `sanity/lib/client.ts`, GROQ queries + types in `sanity/lib/queries.ts`. `React.cache()` deduplicates fetches across `generateMetadata` + page component.
+- **`/blog` listing page** — navy hero strip (`bg-navy pt-page-top`), cream 3-col card grid, orange-text date labels, editorial hover cards. Graceful empty + error states.
+- **`/blog/[slug]` article page** — 780px centered column, contained `aspect-[16/9]` hero image with `rounded-card-lg` (white-framed pattern dropped in favour of contained layout), category pills, Bricolage Grotesque title, meta strip, `PortableText` body, `ScrollProgress` bar, `ContactCTA` + `Footer`.
+- **`PortableText` component** (`components/seo/PortableText.tsx`) — custom renderer supporting h1/h2/h3, blockquote (cream bg + decorative quote mark — no banned `border-left`), inline strong/em, images.
+- **`AboutTeamValues` redesigned** (`/quem-somos`) — layout changed from left/right split to full-width vertical stacks: 2 founder figures in a horizontal row (`max-w-[860px]`, `aspect-[5/4]`, `bg-white p-2` frame), 3 value cards in a horizontal row (white `rounded-card`, icon + title row, description, hover lift). Numbers removed from value cards. Hover tie-line interaction removed.
+- **Card hover animations** — `hover:-translate-y-1 hover:shadow-card-hover transition-[transform,box-shadow] duration-slow` added to all service cards on landing page (previously only the navy CTA card had it). Same on value cards in `/quem-somos`.
+
+**Last updated:** 2026-05-13

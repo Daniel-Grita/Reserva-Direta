@@ -30,7 +30,7 @@ export default function Services() {
           {services.cards.map((card) => (
             <div
               key={card.slug}
-              className="bg-white border border-n-200 rounded-card p-6 shadow-card flex flex-col"
+              className="bg-white border border-n-200 rounded-card p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-[transform,box-shadow] duration-slow flex flex-col"
             >
               <div className="w-10 h-10 rounded-full bg-cream flex items-center justify-center mb-4 text-navy">
                 <ServiceIcon name={card.icon} className="w-5 h-5" />
@@ -46,7 +46,7 @@ export default function Services() {
 
           <Link
             href="/servicos"
-            className="group bg-navy rounded-card p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-slow flex flex-col justify-between min-h-[180px]"
+            className="group bg-navy rounded-card p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-[transform,box-shadow] duration-slow flex flex-col justify-between min-h-[180px]"
           >
             <div className="w-10 h-10 rounded-full bg-orange/15 flex items-center justify-center mb-4 text-orange-text">
               <ArrowRightIcon />

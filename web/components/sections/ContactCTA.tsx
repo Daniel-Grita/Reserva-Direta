@@ -224,7 +224,7 @@ function FoundersIntro() {
   const founders = aboutPage.team.members;
   const firstNames = founders.map((m) => m.name.split(' ')[0]).join(' e ');
   return (
-    <div className="mb-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 bg-white/5 border border-white/10 rounded-card-lg p-5 sm:p-6">
+    <div className="mb-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 border-b border-white/15 pb-8">
       <div className="flex -space-x-3 shrink-0">
         {founders.map((m) => (
           // eslint-disable-next-line @next/next/no-img-element

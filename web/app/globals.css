@@ -290,6 +290,10 @@ body {
 .hero-blob-a { animation: hero-blob-drift-a 14s ease-in-out infinite; }
 .hero-blob-b { animation: hero-blob-drift-b 16s ease-in-out infinite; }
 
+@media (max-width: 1023px) {
+  .hero-blob-a, .hero-blob-b { animation: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] .reveal-up,
   [data-reveal] .reveal-stagger > *,

@@ -56,14 +56,15 @@ Backlog of known fixes and follow-ups. Group by priority. Tick as you go.
 - [x] `/a-nossa-solucao` — booking-engine deep dive (SolucaoHero, SolucaoStats, SolucaoSteps, SolucaoFeatures, SolucaoTrust).
 - [x] `/casos-de-uso` — real client showcase (UseCasesGoogle 3-col grid + UseCasesBooking vertical stack), each ending in a `StatCard` with count-up stat (−€10 / 1–2 weeks) and `text-highlight` punchline. Uses real screenshots in `public/use-cases/` (compressed to ~280–390 KB).
 - [x] `/servicos/[slug]` — ~~5 service detail pages~~ **Deleted 2026-05-11** — content consolidated into `/servicos` as alternating sections (`ServicesPageSections`).
-- [ ] `/blog` — listing page (3-col grid).
-- [ ] `/blog/[slug]` — article template.
+- [x] `/blog` — listing page (3-col grid). Powered by Sanity CMS.
+- [x] `/blog/[slug]` — article template. 780px centered column, contained image, PortableText body.
 
 ---
 
 ## Phase 2
 
-- [ ] **Storyblok CMS** for blog + case studies. (Two prior scaffolds removed — root-level on 2026-05-08, then a partial `web/` wiring on 2026-05-08. Phase 2 will start fresh.)
+- [x] **Sanity CMS** for blog. Project `vsbvopiy`, dataset `blog-post` (public). Case studies CMS integration still pending.
+- [ ] **Sanity CMS** for case studies.
 - [ ] **Cloudflare Pages deployment** + custom domain. Site is already configured for it: `next.config.ts` `images.unoptimized: true`, `public/_headers` with HSTS + CSP + frame-deny, `CloudflareAnalytics` script wired but env-gated on `NEXT_PUBLIC_CF_BEACON_TOKEN`.
 - [ ] **Cloudflare Web Analytics** — flip the env var once a CF beacon token is provisioned.
 - [x] **Connect to GitHub.** Repo: `github.com/Daniel-Grita/Reserva-Directa`.
@@ -73,7 +74,7 @@ Backlog of known fixes and follow-ups. Group by priority. Tick as you go.
 
 ## Open follow-ups (out-of-band, can't be fixed in code)
 
-- [ ] **Rotate Storyblok token** in Storyblok dashboard. Token never committed to git, but lived in `.env.local` and was discussed in chat history. Treat as compromised.
+- [x] **Storyblok token** — never used, no rotation needed. Storyblok dropped in favour of Sanity.
 - [ ] **Confirm spam protection on Formspree form `mvzloknk`** (CAPTCHA / Akismet in Formspree dashboard).
 - [ ] **Replace placeholder images** with real client art: 4× Hero floating cards (Unsplash hotel rooms in `constants.ts` `floatingImages`), `SolucaoHero` photo (picsum), 2 blog covers (Unsplash), `AboutHero` photo (Unsplash). Drop into `/public/...` and update `lib/constants.ts`.
 - [ ] **Calendly URL** — "Agendar Reunião" still posts to `#contacto`; swap when client provides URL.
@@ -103,7 +104,7 @@ Big audit + content + Cloudflare prep + security pass. Highlights:
 
 Hero rework + `/servicos` consolidation + component inventory:
 
-- **Hero floating cards**: 4 asymmetric Unsplash hotel-room images at `lg+`. CSS dual-animation (`hero-card-in` entrance → `hero-float` loop). Hover pauses float. Ambient blob drift on both bg blobs. All reduced-motion safe.
+- **Hero floating cards**: Two responsive layouts. ≥1440px: 4 asymmetric absolute cards (`hero-floats`) with CSS dual-animation (entrance + float loop, hover pauses). <1440px: 2 overlapping 16:9 cards (`hero-stack`) below the CTAs, `w-full max-w-[420px]`, entrance-only animation. Ambient blob drift. Reduced-motion safe. Shared `FloatCard` helper.
 - **`/servicos/[slug]` routes deleted**: 5 detail pages merged into `/servicos` alternating sections (`ServicesPageSections`). Deleted `ServicesPageGrid`, `ServiceDetailHero`, `ServiceIncluded`, `ServiceProcess`, `/servicos/[slug]/page.tsx`. Sitemap simplified to 5 static pages.
 - **Service cards on home page**: 5 white cards converted `<Link>` → `<div>` (no link). Only navy CTA card links to `/servicos`.
 - **`LinkButton` `external` prop**: renders `target="_blank" rel="noopener noreferrer"`.
@@ -112,4 +113,16 @@ Hero rework + `/servicos` consolidation + component inventory:
 
 ---
 
-**Last updated:** 2026-05-11
+---
+
+## 2026-05-13 batch (this session)
+
+Sanity CMS blog integration + Quem Somos redesign + card animations:
+
+- **Sanity CMS live** for `/blog` + `/blog/[slug]`. Dataset was private — fixed to public. `React.cache()` deduplicates Sanity fetches. Custom `PortableText` renderer (h1–h3, blockquote, inline marks, images). `estimateReadTime()` util for read-time meta.
+- **`/blog` listing page**: navy hero strip, cream 3-col grid, orange date labels, hover cards. Graceful empty/error states.
+- **`/blog/[slug]` article page**: 780px centered column, contained `aspect-[16/9]` image with `rounded-card-lg`, category pills, title, meta strip, body, `ScrollProgress` bar.
+- **`AboutTeamValues` redesigned**: founders in horizontal 2-col row (`aspect-[5/4]`, `bg-white p-2` frame matching Hero FloatCard style); values in horizontal 3-col card row. Hover tie-line and numbered values removed.
+- **Card hover lift**: `hover:-translate-y-1 hover:shadow-card-hover` added to all 5 service cards on home landing page + 3 value cards on `/quem-somos`.
+
+**Last updated:** 2026-05-13

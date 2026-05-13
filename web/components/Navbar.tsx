@@ -122,7 +122,7 @@ export default function Navbar() {
           aria-controls="mobile-nav-panel"
           aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           onClick={() => setOpen((prev) => !prev)}
-          className="xl:hidden inline-flex items-center justify-center w-10 h-10 -mr-2 rounded-input text-navy hover:bg-n-100 transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          className="xl:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-input text-navy hover:bg-n-100 transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-white"
         >
           {open ? <CloseIcon /> : <HamburgerIcon />}
         </button>
