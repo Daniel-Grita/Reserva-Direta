@@ -66,14 +66,17 @@ export const getPost = cache(
     client.fetch(POST_BY_SLUG_QUERY, { slug })
 );
 
-export function estimateReadTime(body: any[]): number {
-  if (!body?.length) return 1;
-  const words = body
+export function extractBodyText(body: any[]): string {
+  if (!body?.length) return '';
+  return body
     .filter(b => b._type === 'block' && Array.isArray(b.children))
     .flatMap((b): any[] => b.children)
     .map((c: any) => c.text ?? '')
-    .join(' ')
-    .split(/\s+/)
-    .filter(Boolean).length;
+    .join(' ');
+}
+
+export function estimateReadTime(body: any[]): number {
+  if (!body?.length) return 1;
+  const words = extractBodyText(body).split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 200));
 }

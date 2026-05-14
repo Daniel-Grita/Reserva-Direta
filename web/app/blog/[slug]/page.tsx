@@ -12,6 +12,7 @@ import {
   formatPublishedDate,
   getPost,
   estimateReadTime,
+  extractBodyText,
 } from '@/sanity/lib/queries';
 import Link from 'next/link';
 
@@ -22,11 +23,33 @@ interface BlogPostProps {
 export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPost(slug);
+
+  if (!post) {
+    return {
+      title: 'Artigo não encontrado — Reserva Direta',
+      description: 'Este artigo não existe ou foi removido.',
+    };
+  }
+
+  const excerpt = extractBodyText(post.body).slice(0, 155) || undefined;
+  const imageUrl = post.imageUrl ?? BLOG_FALLBACK_IMAGE;
+
   return {
-    title: post ? `${post.title} — Reserva Direta` : 'Blog Post',
-    description: post
-      ? `${post.title} - artigo sobre estratégias e recursos para alojamentos`
-      : 'Blog post from Reserva Direta',
+    title: `${post.title} — Reserva Direta`,
+    description: excerpt ?? `${post.title} — artigo da Reserva Direta sobre estratégias para alojamentos.`,
+    openGraph: {
+      title: post.title,
+      description: excerpt,
+      images: [{ url: imageUrl, alt: post.imageAlt ?? post.title }],
+      type: 'article',
+      publishedTime: post.publishedAt,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: excerpt,
+      images: [imageUrl],
+    },
   };
 }
 
@@ -92,13 +115,12 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
           {post.categories?.length ? (
             <div className="flex flex-wrap gap-2 mb-5">
               {post.categories.map((cat) => (
-                <Link
+                <span
                   key={cat._id}
-                  href={`/blog?category=${cat.slug.current}`}
-                  className="px-3 py-1 bg-cream text-orange-text text-label font-bold rounded-full tracking-label uppercase hover:bg-n-200 transition-colors"
+                  className="px-3 py-1 bg-cream text-orange-text text-label font-bold rounded-full tracking-label uppercase"
                 >
                   {cat.title}
-                </Link>
+                </span>
               ))}
             </div>
           ) : null}

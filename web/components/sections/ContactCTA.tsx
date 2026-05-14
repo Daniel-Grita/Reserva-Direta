@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { aboutPage, contactCTA } from '@/lib/constants';
 import { useInView } from '@/lib/useInView';
 import { withNoBreak } from '@/lib/highlight';
@@ -208,6 +209,17 @@ export default function ContactCTA() {
               >
                 {status === 'loading' ? 'A enviar...' : contactCTA.submit}
               </button>
+
+              <p className="text-caption font-body text-n-400 text-center">
+                {contactCTA.consent}{' '}
+                <Link
+                  href="/politica-privacidade"
+                  className="underline underline-offset-2 hover:text-n-600 transition-colors duration-base"
+                >
+                  {contactCTA.consent_link}
+                </Link>
+                .
+              </p>
             </form>
           </div>
 

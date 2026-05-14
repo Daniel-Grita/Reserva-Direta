@@ -18,7 +18,6 @@ export default function SolucaoHero() {
 
           <div className="relative max-w-4xl mx-auto">
             <div className="relative aspect-[16/9] md:aspect-[21/9] w-full rounded-card-lg overflow-hidden bg-n-300 shadow-card-hover">
-              {/* TODO: swap back to next/image once `image.src` is a /public asset (picsum host isn't whitelisted). */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={image.src}

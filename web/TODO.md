@@ -75,9 +75,21 @@ Backlog of known fixes and follow-ups. Group by priority. Tick as you go.
 ## Open follow-ups (out-of-band, can't be fixed in code)
 
 - [x] **Storyblok token** — never used, no rotation needed. Storyblok dropped in favour of Sanity.
-- [ ] **Confirm spam protection on Formspree form `mvzloknk`** (CAPTCHA / Akismet in Formspree dashboard).
-- [ ] **Replace placeholder images** with real client art: 4× Hero floating cards (Unsplash hotel rooms in `constants.ts` `floatingImages`), `SolucaoHero` photo (picsum), 2 blog covers (Unsplash), `AboutHero` photo (Unsplash). Drop into `/public/...` and update `lib/constants.ts`.
-- [ ] **Calendly URL** — "Agendar Reunião" still posts to `#contacto`; swap when client provides URL.
+- [x] **Replace placeholder images** — Unsplash images confirmed intentional. No action needed.
+- [x] **Calendly URL** — "Agendar Reunião" links to `#contacto` (the form). Intentional.
+
+### Before going live
+- [ ] **Send a test form submission** — verify it lands in inbox via Formspree.
+- [ ] **Enable reCAPTCHA** on Formspree dashboard for form `mvzloknk`.
+- [ ] **Mobile test** — open every page on a real phone, tap every CTA.
+- [ ] **Cloudflare Pages deployment** — migrate from Vercel. Set env vars: `NEXT_PUBLIC_FORMSPREE_ID`, `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`.
+- [ ] **Custom domain** — point `reservadireta.pt` to Cloudflare Pages.
+- [ ] **Cloudflare Web Analytics** — set `NEXT_PUBLIC_CF_BEACON_TOKEN` env var (script already wired).
+
+### After going live
+- [ ] **Google Search Console** — verify ownership, submit `https://reservadireta.pt/sitemap.xml`, request indexing on homepage.
+- [ ] **Google Business Profile** — confirm website URL is set to `reservadireta.pt`.
+- [ ] **Run Lighthouse** — DevTools → Lighthouse on the live domain. Target 90+ Performance, 100 SEO/Accessibility.
 
 ---
 

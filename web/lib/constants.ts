@@ -45,7 +45,6 @@ export const aboutPage = {
       "João e Sebastião começaram a Reserva Direta porque viram o mesmo problema repetir-se: pequenos alojamentos, pensões e hotéis boutique pagando 15 a 25% de comissão em cada reserva para as OTAs, com pouco controlo sobre a experiência do hóspede.",
       "Percebemos que havia uma forma melhor: combinar design, tecnologia e marketing para ajudar estas propriedades a ganhar independência das OTAs, a manter mais margem em cada reserva e a ter uma relação direta com os seus hóspedes.",
     ],
-    // TODO: replace this external Unsplash URL with a real client photo in /public/about/.
     image: { src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80", alt: "Receção de hotel boutique" },
   },
   team: {
@@ -568,7 +567,6 @@ export const blog = {
   label: "BLOG / RECURSOS",
   heading: "Aprenda a crescer o seu alojamento",
   intro: "Partilhamos estratégias, guias práticos e insights do mercado de hotelaria.",
-  // TODO: replace these external Unsplash URLs with real cover art in /public/blog/.
   cards: [
     {
       title: "O Segredo para o Sucesso do seu Alojamento Local",
@@ -631,6 +629,8 @@ export const contactCTA = {
   subtitle:
     "Deixe-nos os seus dados e entramos em contacto para perceber como podemos ajudar o seu alojamento a crescer.",
   fine_print: "Sem compromisso. Respondemos em menos de 24 horas.",
+  consent: "Ao submeter, concorda com a nossa",
+  consent_link: "Política de Privacidade",
   fields: {
     nome: { label: "Nome", placeholder: "O seu nome completo" },
     telemovel: { label: "Telemóvel", placeholder: "+351 912 345 678" },
