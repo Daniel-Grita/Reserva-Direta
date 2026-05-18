@@ -4,11 +4,6 @@ import { problem } from '@/lib/constants';
 import { useInView } from '@/lib/useInView';
 import { withHighlight } from '@/lib/highlight';
 
-const PARAGRAPH_HIGHLIGHTS = [
-  '15-25% de cada reserva',
-  'dependência perigosa',
-  'controlo total',
-];
 
 export default function Problem() {
   const [ref, inView] = useInView<HTMLElement>();
@@ -25,11 +20,15 @@ export default function Problem() {
           </h2>
 
           <div className="space-y-4">
-            {problem.paragraphs.map((para, i) => (
-              <p key={i} className="text-body-base font-body text-n-600">
-                {withHighlight(para, PARAGRAPH_HIGHLIGHTS[i] ?? '')}
-              </p>
-            ))}
+            <p className="text-body-base font-body text-n-600">
+              {withHighlight(problem.paragraphs[0], '15-25% de cada reserva')}
+            </p>
+            <p className="text-body-base font-body text-n-600">
+              {withHighlight(problem.paragraphs[1], 'dependência perigosa')}
+            </p>
+            <p className="text-body-base font-body text-n-600">
+              {withHighlight(problem.paragraphs[2], 'controlo total')}
+            </p>
           </div>
         </div>
 
@@ -83,7 +82,7 @@ function ComparisonPanel({
 
   return (
     <div
-      className={`group rounded-card-lg p-12 transition-all duration-slow hover:-translate-y-1 hover:shadow-card-hover ${s.wrapper}`}
+      className={`group rounded-card-lg p-6 sm:p-8 lg:p-12 transition-all duration-slow sm:hover:-translate-y-1 sm:hover:shadow-card-hover ${s.wrapper}`}
     >
       <div className="flex items-center gap-2 mb-4">
         <ToneIcon positive={tone === 'brand'} />
