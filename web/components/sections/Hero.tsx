@@ -7,22 +7,22 @@ const floatingImages = [
   {
     src: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=700&q=80',
     alt: 'Suite de hotel boutique com luz natural',
-    classes: 'left-[7%] top-[24%] w-[255px] h-[335px] z-10',
+    classes: 'left-[7%] top-[24%] w-[295px] h-[385px] z-10',
   },
   {
     src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=700&q=80',
     alt: 'Quarto de alojamento local minimalista',
-    classes: 'left-[11%] top-[62%] w-[290px] h-[230px] z-20',
+    classes: 'left-[11%] top-[62%] w-[335px] h-[265px] z-20',
   },
   {
     src: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=700&q=80',
     alt: 'Sala de estar moderna num alojamento turístico',
-    classes: 'right-[7%] top-[20%] w-[310px] h-[240px] z-10',
+    classes: 'right-[7%] top-[20%] w-[355px] h-[275px] z-10',
   },
   {
     src: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=700&q=80',
     alt: 'Quarto rústico com decoração contemporânea',
-    classes: 'right-[15%] top-[44%] w-[240px] h-[310px] z-20',
+    classes: 'right-[15%] top-[44%] w-[275px] h-[355px] z-20',
   },
 ];
 
@@ -71,12 +71,12 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-stack relative min-[1440px]:hidden w-full max-w-[680px] aspect-[2/1]">
-          <div className="group absolute left-0 top-0 w-[54%] aspect-video z-10">
-            <FloatCard src={floatingImages[0].src} alt={floatingImages[0].alt} sizes="(max-width: 768px) 300px, 400px" priority />
+        <div className="hero-stack relative min-[1440px]:hidden w-full max-w-[760px] aspect-[2/1]">
+          <div className="group absolute left-0 top-0 w-[58%] aspect-video z-10">
+            <FloatCard src={floatingImages[0].src} alt={floatingImages[0].alt} sizes="(max-width: 768px) 340px, 460px" priority />
           </div>
-          <div className="group absolute right-0 bottom-[24%] w-[54%] aspect-video z-20">
-            <FloatCard src={floatingImages[2].src} alt={floatingImages[2].alt} sizes="(max-width: 768px) 300px, 400px" />
+          <div className="group absolute right-0 bottom-[24%] w-[58%] aspect-video z-20">
+            <FloatCard src={floatingImages[2].src} alt={floatingImages[2].alt} sizes="(max-width: 768px) 340px, 460px" />
           </div>
         </div>
       </div>

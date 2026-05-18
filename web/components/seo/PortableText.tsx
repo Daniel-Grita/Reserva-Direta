@@ -49,9 +49,11 @@ function renderBlock(block: PortableTextBlock, index: number): ReactNode {
   }
 
   if (block._type === 'image' && block.asset) {
+    const assetUrl = block.asset.url?.startsWith('https://cdn.sanity.io/') ? block.asset.url : undefined;
+    if (!assetUrl) return null;
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img key={key} src={block.asset.url ?? ''} alt={block.alt ?? ''} className="w-full rounded-lg my-8 max-w-2xl" />
+      <img key={key} src={assetUrl} alt={block.alt ?? ''} className="w-full rounded-lg my-8 max-w-2xl" />
     );
   }
 

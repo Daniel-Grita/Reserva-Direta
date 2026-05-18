@@ -143,7 +143,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
                 <span>
                   Por{' '}
                   <Link
-                    href={`/blog/author/${post.author.slug.current}`}
+                    href={/^[a-z0-9-]+$/.test(post.author.slug.current) ? `/blog/author/${post.author.slug.current}` : '/blog'}
                     className="text-navy font-medium hover:text-n-600 transition-colors"
                   >
                     {post.author.name}
