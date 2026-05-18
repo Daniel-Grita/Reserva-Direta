@@ -12,7 +12,7 @@ export default function NotFound() {
   return (
     <main id="main" tabIndex={-1} className="w-full focus:outline-none">
       <Navbar />
-      <section className="bg-light-blue pt-[112px] pb-section-y">
+      <section className="bg-light-blue pt-24 sm:pt-[112px] pb-section-y">
         <div className="section-container max-w-2xl text-center space-y-6">
           <p className="text-label font-body uppercase tracking-label text-orange-text">
             Erro 404

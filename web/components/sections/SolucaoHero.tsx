@@ -11,7 +11,7 @@ export default function SolucaoHero() {
   return (
     <section ref={ref} data-reveal={inView} id="hero" className="bg-light-blue pt-24 lg:pt-28 pb-section-y-sm">
       <div className="section-container">
-        <div className="reveal-up max-w-4xl mx-auto text-center space-y-6">
+        <div className="reveal-up max-w-4xl md:mx-auto text-left md:text-center space-y-6">
           <h1 className="text-display-md lg:text-display-lg font-display text-navy text-balance">
             {heading}
           </h1>
@@ -42,7 +42,7 @@ export default function SolucaoHero() {
 
           <p className="text-display-xs font-display text-orange-text">{tagline}</p>
 
-          <p className="text-body-base font-body text-n-600 max-w-3xl mx-auto text-balance">{intro}</p>
+          <p className="text-body-base font-body text-n-600 max-w-3xl md:mx-auto text-balance">{intro}</p>
         </div>
       </div>
     </section>

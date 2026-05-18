@@ -30,11 +30,11 @@
   --text-display-xl--line-height: 1.05;
   --text-display-xl--font-weight: 800;
   --text-display-lg: 48px;
-  --text-display-lg--line-height: 1.1;
+  --text-display-lg--line-height: 1.05;
   --text-display-lg--font-weight: 800;
   --text-display-md: 40px;
-  --text-display-md--line-height: 1.15;
-  --text-display-md--font-weight: 700;
+  --text-display-md--line-height: 1.05;
+  --text-display-md--font-weight: 800;
   --text-display-sm: 28px;
   --text-display-sm--line-height: 1.25;
   --text-display-sm--font-weight: 700;
@@ -83,6 +83,8 @@
   --tracking-label: 0.15em;
 
   /* Motion */
+  --duration-base: 180ms;
+  --duration-slow: 600ms;
   --animate-fade-up: fadeUp 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -133,6 +135,7 @@ body {
 @media (max-width: 640px) {
   .section-container { padding: 40px 24px; }
   .section-container-lg { padding: 48px 24px; }
+  :root { --spacing-page-top: 96px; }
 }
 
 /* ──────────────────────────────────────────────────────────

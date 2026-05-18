@@ -152,3 +152,20 @@ Sanity CMS blog integration + Quem Somos redesign + card animations:
 - **Card hover lift**: `hover:-translate-y-1 hover:shadow-card-hover` added to all 5 service cards on home landing page + 3 value cards on `/quem-somos`.
 
 **Last updated:** 2026-05-13 (post-audit)
+
+---
+
+## 2026-05-18 batch — mobile polish + simplify pass + UI fixes (commit 9600077)
+
+- **Hero (`Hero.tsx`):** mobile layout restored — `sm:h-[88vh]`, `sm:flex-col sm:justify-center`; text left-aligned on mobile, centred on sm+; CTA row `flex-row flex-1 sm:flex-none`; mobile CTA2 label `hero.cta2.labelMobile` ("Como Funciona?") added to constants; `withHighlight` restored on subtitle using `hero.subtitle` from constants; heading line break adjusted.
+- **Services (`Services.tsx`):** `bg-navy sm:bg-cream` — navy on mobile; split mobile/desktop header blocks; icon container `rounded-card`; CTA card `bg-orange sm:bg-navy`; all hover effects prefixed `sm:hover:`.
+- **CaseStudies (`CaseStudies.tsx`):** `sm:hover:` prefixes; `rounded-card` on category badge (was `rounded-full`); dead `withHighlight` import removed.
+- **ContactCTA (`ContactCTA.tsx`):** **Turnstile CAPTCHA** added — widget lifecycle (render/reset/remove), `captchaLoaded` state gates the effect, submit disabled until token present, reset on success. `setTimeout` leak fixed with `timerRef`. `declare global` moved after imports. Mobile alignment: `sm:text-center`, FoundersIntro `sm:justify-center`.
+- **ServicesPageHero:** fixed missing spaces around `<br className="sm:hidden" />` — was concatenating words on desktop ("PRECISAPARA", "daReserva").
+- **ServicesPageSections:** `whitespace-pre-line` on intro `<p>`; fidelizacao intro gets explicit `\n` before "reservas" to prevent orphaned "clientes recorrentes." on last line.
+- **`/a-nossa-solucao`:** `PageTOC` left-rail navigation removed entirely.
+- **constants.ts:** `hero.subtitle` `\n` breaks removed (natural wrapping via `max-w-lg`); `hero.cta2.labelMobile` added; fidelizacao intro `\n` before "reservas"; comma cleanup in two callout strings.
+- **`/simplify` pass:** also cleaned up redundant `captchaLoaded`-pattern comments in Services, moved `declare global`, removed dead imports.
+
+### Still unstaged from prior sessions (need their own commit)
+`blog/[slug]/page.tsx`, `blog/page.tsx`, `globals.css`, `not-found.tsx`, `politica-privacidade/page.tsx`, `Footer.tsx`, `Navbar.tsx`, `AboutHero.tsx`, `AboutTeamValues.tsx`, `BlogPreview.tsx`, `BookingSystem.tsx`, `HowItWorks.tsx`, `Problem.tsx`, `SolucaoHero.tsx`, `SolucaoStats.tsx`, `SolucaoSteps.tsx`, `UseCaseCard.tsx`, `SectionHeader.tsx`, `StatTile.tsx`, `wrangler.jsonc` (untracked).

@@ -71,7 +71,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 inset-x-0 h-[72px] z-30 bg-white shadow-nav">
+    <nav className="fixed top-0 inset-x-0 h-14 sm:h-[72px] z-30 bg-white shadow-nav">
       <div className="h-full max-w-[1200px] mx-auto px-6 sm:px-8 md:px-16 lg:px-section-x flex items-center justify-between">
         <Link href="/" aria-label="Reserva Direta — Início" className="flex items-center">
           <Image
@@ -80,7 +80,7 @@ export default function Navbar() {
             width={295}
             height={102}
             priority
-            className="h-12 w-auto"
+            className="h-7 sm:h-10 w-auto"
           />
         </Link>
 
@@ -132,7 +132,7 @@ export default function Navbar() {
         ref={panelRef}
         id="mobile-nav-panel"
         hidden={!open}
-        className="xl:hidden fixed inset-x-0 top-[72px] bottom-0 bg-white border-t border-n-150 overflow-y-auto"
+        className="xl:hidden fixed inset-x-0 top-14 sm:top-[72px] bottom-0 bg-white border-t border-n-150 overflow-y-auto"
       >
         <div className="px-6 sm:px-8 py-6 flex flex-col gap-1">
           {navItems.map((item, i) => {

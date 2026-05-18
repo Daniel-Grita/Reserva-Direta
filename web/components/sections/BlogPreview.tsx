@@ -47,7 +47,7 @@ export default async function BlogPreview() {
           {articles.map((article, idx) => (
             <div
               key={article._id ?? `fallback-${idx}`}
-              className="bg-white border border-n-200 rounded-card overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-[transform,box-shadow] duration-slow"
+              className="bg-white border border-n-200 rounded-card overflow-hidden shadow-card sm:hover:shadow-card-hover sm:hover:-translate-y-1 sm:hover:scale-[1.02] transition-[transform,box-shadow] duration-slow ease-in-out"
             >
               <div className="w-full aspect-[16/9] bg-n-300 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -66,7 +66,7 @@ export default async function BlogPreview() {
                 {article.slug ? (
                   <Link
                     href={`/blog/${article.slug}`}
-                    className="text-button font-body font-bold text-navy hover:text-n-600 transition-colors"
+                    className="text-button font-body font-bold text-orange-text sm:hover:opacity-80 transition-opacity"
                   >
                     Ler artigo →
                   </Link>

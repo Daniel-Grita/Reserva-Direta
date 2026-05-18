@@ -21,7 +21,7 @@ export default function BookingSystem() {
               {bookingSystem.heading}
             </h2>
             <p className="text-body-base font-body text-n-600">
-              {withHighlight('Um motor de reservas profissional, integrado no seu site — sem intermediários, sem comissões.', 'sem intermediários')}
+              {withHighlight('Um motor de reservas profissional, integrado no seu site, sem intermediários, sem comissões.', 'sem intermediários')}
             </p>
           </div>
 

@@ -15,7 +15,7 @@ export default function PoliticaPrivacidadePage() {
     <main id="main" tabIndex={-1} className="w-full focus:outline-none">
       <Breadcrumbs items={[{ name: 'Política de Privacidade', url: '/politica-privacidade' }]} />
       <Navbar />
-      <section className="bg-white pt-[112px] pb-section-y">
+      <section className="bg-white pt-24 sm:pt-[112px] pb-section-y">
         <div className="section-container max-w-3xl">
           <p className="text-label font-body uppercase tracking-label text-orange-text mb-4">
             Privacidade

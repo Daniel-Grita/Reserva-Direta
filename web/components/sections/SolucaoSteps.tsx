@@ -18,7 +18,7 @@ export default function SolucaoSteps() {
 
         <ol className="reveal-stagger space-y-6 mb-12">
           {bookingSystem.process.steps.map((step, i) => (
-            <li key={i} className="flex gap-5 items-start">
+            <li key={i} className="flex flex-col sm:flex-row gap-4 sm:gap-5 sm:items-start">
               <span
                 aria-hidden
                 className="flex-shrink-0 w-12 h-12 rounded-card bg-orange text-white text-display-xs font-display flex items-center justify-center"

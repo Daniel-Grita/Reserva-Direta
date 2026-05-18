@@ -65,14 +65,14 @@ export default async function BlogPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
                 <Link key={post._id} href={`/blog/${post.slug.current}`} className="group">
-                  <article className="h-full bg-white rounded-card overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-[transform,box-shadow] duration-slow flex flex-col">
+                  <article className="h-full bg-white rounded-card overflow-hidden shadow-card sm:hover:shadow-card-hover sm:hover:-translate-y-1 sm:hover:scale-[1.02] transition-[transform,box-shadow] duration-slow ease-in-out flex flex-col">
                     <div className="w-full aspect-[16/9] bg-n-300 overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={post.imageUrl ?? BLOG_FALLBACK_IMAGE}
                         alt={post.title}
                         loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-slow"
+                        className="w-full h-full object-cover sm:group-hover:scale-105 transition-transform duration-slow"
                       />
                     </div>
                     <div className="p-6 flex flex-col flex-1">
@@ -81,10 +81,10 @@ export default async function BlogPage() {
                           {formatPublishedDate(post.publishedAt)}
                         </p>
                       )}
-                      <h2 className="text-display-xs font-display text-navy mb-4 leading-snug flex-1 group-hover:text-n-600 transition-colors">
+                      <h2 className="text-display-xs font-display text-navy mb-4 leading-snug flex-1 sm:group-hover:text-n-600 transition-colors">
                         {post.title}
                       </h2>
-                      <span className="text-button font-bold text-navy group-hover:text-orange-text transition-colors">
+                      <span className="text-button font-bold text-navy sm:group-hover:text-orange-text transition-colors">
                         Ler artigo →
                       </span>
                     </div>

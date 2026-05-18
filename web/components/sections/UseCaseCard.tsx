@@ -32,7 +32,7 @@ export default function UseCaseCard({ label, image, imageAlt, priority, aspect, 
           <span className="text-body-sm font-body text-center px-4">Screenshot a adicionar</span>
         </div>
       )}
-      <figcaption className="text-label font-body text-n-600 uppercase tracking-label text-center py-3 px-4 border-t border-n-200">
+      <figcaption className="text-label font-body text-n-600 uppercase tracking-label text-left sm:text-center py-3 px-4 border-t border-n-200">
         {label}
       </figcaption>
     </figure>

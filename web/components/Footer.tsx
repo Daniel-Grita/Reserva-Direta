@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="bg-footer-bg text-white py-section-y-sm">
       <div className="section-container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 lg:gap-x-16 gap-y-12 mb-12">
           <div>
             <h3 className="text-display-xs font-display text-white mb-2">
               {footer.brand}

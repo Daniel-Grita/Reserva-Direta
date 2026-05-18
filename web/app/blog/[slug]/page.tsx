@@ -98,7 +98,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
       <Navbar />
 
       {/* All content — centered narrow column */}
-      <section className="bg-white pt-[calc(72px+48px)] pb-20">
+      <section className="bg-white pt-[calc(56px+48px)] sm:pt-[calc(72px+48px)] pb-20">
         <div className="mx-auto max-w-[780px] px-6">
 
           {/* Contained hero image */}

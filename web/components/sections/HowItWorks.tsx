@@ -15,6 +15,7 @@ export default function HowItWorks() {
         </div>
 
         <ol className="reveal-stagger relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mt-4">
+          {/* Horizontal rail — desktop only */}
           <span
             aria-hidden
             className="hidden lg:block absolute top-5 left-5 right-5 h-px bg-gradient-to-r from-orange via-orange/40 to-orange/0"
@@ -24,7 +25,7 @@ export default function HowItWorks() {
             <li key={step.number} className="relative flex flex-col items-start text-left">
               <span
                 aria-hidden
-                className="relative z-10 flex items-center justify-center w-10 h-10 rounded-full bg-navy text-white text-body-sm font-display font-bold shadow-card mb-5 ring-8 ring-white"
+                className="relative z-10 flex items-center justify-center w-10 h-10 rounded-card bg-navy text-white text-body-sm font-display font-bold shadow-card mb-5 ring-8 ring-white"
               >
                 {step.number}
               </span>
