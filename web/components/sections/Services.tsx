@@ -5,24 +5,30 @@ import { services } from '@/lib/constants';
 import SectionHeader from '../ui/SectionHeader';
 import ServiceIcon from '../ui/ServiceIcon';
 import { useInView } from '@/lib/useInView';
-import { withHighlight } from '@/lib/highlight';
 
 export default function Services() {
   const [ref, inView] = useInView<HTMLElement>();
 
   return (
-    <section ref={ref} data-reveal={inView} id="servicos" className="bg-cream py-section-y">
+    <section ref={ref} data-reveal={inView} id="servicos" className="bg-navy sm:bg-cream py-section-y">
       <div className="section-container">
-        <div className="reveal-up">
+        <div className="reveal-up sm:hidden max-w-3xl mb-16">
+          <div className="text-label font-body uppercase tracking-label mb-4 text-orange">
+            {services.heading}
+          </div>
+          <h2 className="text-display-md font-display text-white mb-6">
+            {services.label}
+          </h2>
+          <p className="text-body-base font-body text-white/70">
+            {services.intro}
+          </p>
+        </div>
+
+        <div className="reveal-up hidden sm:block">
           <SectionHeader
             label={services.label}
-            heading={services.heading}
-            intro={
-              <>
-                <span className="block">{withHighlight(services.intro.split('. ')[0] + '.', 'resultados máximos')}</span>
-                <span className="block">Escolha o que faz sentido para o seu alojamento.</span>
-              </>
-            }
+            heading={<>Tudo o que precisa para<br />crescer online</>}
+            intro={<>Cada serviço funciona de forma independente, ou em conjunto para resultados máximos.<br /> Escolha o que faz sentido para o seu alojamento.</>}
           />
         </div>
 
@@ -30,9 +36,9 @@ export default function Services() {
           {services.cards.map((card) => (
             <div
               key={card.slug}
-              className="bg-white border border-n-200 rounded-card p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-[transform,box-shadow] duration-slow flex flex-col"
+              className="bg-white border border-n-200 rounded-card p-6 shadow-card sm:hover:shadow-card-hover sm:hover:-translate-y-1 sm:hover:scale-[1.02] transition-[transform,box-shadow] duration-slow ease-in-out flex flex-col"
             >
-              <div className="w-10 h-10 rounded-full bg-cream flex items-center justify-center mb-4 text-navy">
+              <div className="w-10 h-10 rounded-card bg-navy/10 sm:bg-cream flex items-center justify-center mb-4 text-navy">
                 <ServiceIcon name={card.icon} className="w-5 h-5" />
               </div>
               <h3 className="text-card-title font-display text-navy mb-2 leading-tight">
@@ -46,16 +52,16 @@ export default function Services() {
 
           <Link
             href="/servicos"
-            className="group bg-navy rounded-card p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-[transform,box-shadow] duration-slow flex flex-col justify-between min-h-[180px]"
+            className="group bg-orange sm:bg-navy rounded-card p-6 shadow-cta sm:shadow-card sm:hover:shadow-card-hover sm:hover:-translate-y-1 sm:hover:scale-[1.02] transition-[transform,box-shadow] duration-slow ease-in-out flex flex-col justify-between min-h-[180px]"
           >
-            <div className="w-10 h-10 rounded-full bg-orange/15 flex items-center justify-center mb-4 text-orange-text">
+            <div className="w-10 h-10 rounded-card bg-navy/10 sm:bg-orange/15 flex items-center justify-center mb-4 text-navy sm:text-orange-text">
               <ArrowRightIcon />
             </div>
             <div>
-              <h3 className="text-card-title font-display text-white mb-2 leading-tight">
+              <h3 className="text-card-title font-display text-navy sm:text-white mb-2 leading-tight">
                 Descobre mais sobre os nossos serviços
               </h3>
-              <span className="text-button font-body font-bold text-orange inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-[gap] duration-base">
+              <span className="text-button font-body font-bold text-navy sm:text-orange inline-flex items-center gap-1.5 sm:group-hover:gap-2.5 transition-[gap] duration-base">
                 Ver todos
                 <ArrowRightIcon className="w-3.5 h-3.5" />
               </span>

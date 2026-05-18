@@ -28,14 +28,14 @@ const floatingImages = [
 
 export default function Hero() {
   return (
-    <section className="relative h-[88vh] min-h-[640px] overflow-hidden bg-light-blue">
+    <section className="relative sm:h-[88vh] sm:min-h-[640px] min-[1440px]:overflow-hidden bg-light-blue sm:flex sm:flex-col sm:justify-center sm:pt-[72px]">
       <span
         aria-hidden
         className="hero-blob-a pointer-events-none absolute -top-32 -left-24 w-[36rem] h-[36rem] rounded-full bg-orange/8 blur-3xl"
       />
       <span
         aria-hidden
-        className="hero-blob-b pointer-events-none absolute -bottom-32 -right-24 w-[36rem] h-[36rem] rounded-full bg-navy/8 blur-3xl"
+        className="hero-blob-b pointer-events-none absolute bottom-0 -right-24 w-[36rem] h-[36rem] rounded-full bg-navy/8 blur-3xl"
       />
 
       <div className="hero-floats hidden min-[1440px]:block absolute inset-0 pointer-events-none">
@@ -49,42 +49,34 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="relative h-full flex flex-col items-center justify-center gap-8 sm:gap-10 px-6 sm:px-8 md:px-16 lg:px-section-x pt-[72px]">
-        <div className="hero-stagger max-w-3xl text-center space-y-6">
+      <div className="relative flex flex-col items-center gap-8 sm:gap-10 px-6 sm:px-8 md:px-16 lg:px-section-x pt-[80px] pb-10 sm:pt-0 sm:pb-0">
+        <div className="hero-stagger max-w-3xl text-left sm:text-center space-y-6">
           <h1 className="text-display-md lg:text-display-lg font-display text-navy">
             <span className="block whitespace-pre-line">{hero.heading}</span>
             <span className="block mt-1 lg:mt-2">{hero.headingSecondary}</span>
           </h1>
 
-          <p className="text-body-base font-body text-n-600 max-w-2xl mx-auto whitespace-pre-line">
+          <p className="text-body-base font-body text-n-600 max-w-lg mx-auto">
             {withHighlight(hero.subtitle, 'reservas diretas')}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 pt-2 justify-center">
-            <LinkButton href={hero.cta1.href} variant="primary">
+          <div className="flex flex-row gap-3 pt-2 sm:justify-center">
+            <LinkButton href={hero.cta1.href} variant="primary" className="flex-1 sm:flex-none">
               {hero.cta1.label}
             </LinkButton>
-            <LinkButton href={hero.cta2.href} variant="secondary">
-              {hero.cta2.label}
+            <LinkButton href={hero.cta2.href} variant="secondary" className="flex-1 sm:flex-none">
+              <span className="sm:hidden">{hero.cta2.labelMobile}</span>
+              <span className="hidden sm:inline">{hero.cta2.label}</span>
             </LinkButton>
           </div>
         </div>
 
-        <div className="hero-stack relative min-[1440px]:hidden w-full max-w-[420px] aspect-[20/7]">
-          <div className="group absolute left-0 top-0 w-[52%] aspect-video z-10">
-            <FloatCard
-              src={floatingImages[0].src}
-              alt={floatingImages[0].alt}
-              sizes="(max-width: 768px) 160px, 240px"
-              priority
-            />
+        <div className="hero-stack relative min-[1440px]:hidden w-full max-w-[680px] aspect-[2/1]">
+          <div className="group absolute left-0 top-0 w-[54%] aspect-video z-10">
+            <FloatCard src={floatingImages[0].src} alt={floatingImages[0].alt} sizes="(max-width: 768px) 300px, 400px" priority />
           </div>
-          <div className="group absolute right-0 bottom-0 w-[52%] aspect-video z-20">
-            <FloatCard
-              src={floatingImages[2].src}
-              alt={floatingImages[2].alt}
-              sizes="(max-width: 768px) 160px, 240px"
-            />
+          <div className="group absolute right-0 bottom-[24%] w-[54%] aspect-video z-20">
+            <FloatCard src={floatingImages[2].src} alt={floatingImages[2].alt} sizes="(max-width: 768px) 300px, 400px" />
           </div>
         </div>
       </div>
@@ -94,7 +86,7 @@ export default function Hero() {
 
 function FloatCard({ src, alt, sizes, priority }: { src: string; alt: string; sizes: string; priority?: boolean }) {
   return (
-    <div className="w-full h-full rounded-card-lg bg-white p-2 shadow-card transition-[transform,box-shadow] duration-slow group-hover:shadow-card-hover group-hover:-translate-y-2 group-hover:scale-[1.02]">
+    <div className="w-full h-full rounded-card-lg bg-white p-2 shadow-card transition-[transform,box-shadow] duration-slow ease-in-out sm:group-hover:shadow-card-hover sm:group-hover:-translate-y-2 sm:group-hover:scale-[1.02]">
       <div className="relative w-full h-full rounded-card overflow-hidden">
         <Image
           src={src}
@@ -102,7 +94,7 @@ function FloatCard({ src, alt, sizes, priority }: { src: string; alt: string; si
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover transition-transform duration-slow group-hover:scale-[1.04]"
+          className="object-cover transition-transform duration-slow sm:group-hover:scale-[1.04]"
         />
       </div>
     </div>

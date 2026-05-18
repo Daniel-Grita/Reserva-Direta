@@ -12,7 +12,7 @@ export default function ServicesPageHero() {
     <section
       ref={ref}
       data-reveal={inView}
-      className="relative overflow-hidden bg-cream pt-[112px] pb-section-y"
+      className="relative overflow-hidden bg-cream pt-24 sm:pt-[112px] pb-section-y"
     >
       <span
         aria-hidden
@@ -24,18 +24,18 @@ export default function ServicesPageHero() {
       />
 
       <div className="section-container relative">
-        <div className="reveal-up max-w-3xl mx-auto text-center space-y-6">
+        <div className="reveal-up max-w-3xl md:mx-auto text-left md:text-center space-y-6">
           <p className="text-label font-body uppercase tracking-label text-orange-text">
-            {eyebrow}
+            Tudo o que precisa<br className="sm:hidden" /> para crescer online
           </p>
           <h1 className="text-display-md lg:text-display-lg font-display text-navy text-balance">
-            {heading}
+            Os Serviços da<br className="sm:hidden" /> Reserva Direta
           </h1>
-          <p className="text-body-base font-body text-n-600 max-w-2xl mx-auto">
+          <p className="text-body-base font-body text-n-600 max-w-2xl md:mx-auto">
             {intro}
           </p>
 
-          <ul className="flex flex-wrap items-center justify-center gap-2 pt-2">
+          <ul className="flex flex-wrap items-center justify-start md:justify-center gap-2 pt-2">
             {tags.map((t) => (
               <li key={t.slug}>
                 <a
@@ -44,7 +44,7 @@ export default function ServicesPageHero() {
                 >
                   <span
                     aria-hidden
-                    className="h-1.5 w-1.5 rounded-full bg-orange transition-transform duration-base group-hover:scale-150"
+                    className="h-1.5 w-1.5 rounded-sm bg-orange transition-transform duration-base group-hover:scale-150"
                   />
                   {t.label}
                 </a>

@@ -49,7 +49,7 @@ function ServiceSection({
           <h2 className="text-display-sm lg:text-display-md font-display text-navy text-balance">
             {detail.heading}
           </h2>
-          <p className="text-body-base font-body text-n-600">{detail.intro}</p>
+          <p className="text-body-base font-body text-n-600 whitespace-pre-line">{detail.intro}</p>
         </div>
 
         <div className="reveal-up mt-10">
@@ -60,7 +60,7 @@ function ServiceSection({
             {detail.included.items.map((item) => (
               <li
                 key={item}
-                className={`flex items-start gap-4 rounded-card-lg p-5 lg:p-6 transition-[transform,box-shadow] duration-slow hover:-translate-y-1 hover:shadow-card-hover ${
+                className={`flex flex-row items-center text-left gap-3 sm:gap-4 rounded-card-lg p-5 lg:p-6 transition-[transform,box-shadow] duration-slow ease-in-out sm:hover:shadow-card-hover sm:hover:-translate-y-1 sm:hover:scale-[1.02] ${
                   isAlt ? 'bg-white' : 'bg-light-blue'
                 }`}
               >
@@ -143,7 +143,7 @@ function ServiceFaq({
               aria-expanded={isOpen}
               aria-controls={panelId}
               onClick={() => toggleOne(i)}
-              className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-n-100 transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              className="w-full px-6 py-4 text-left flex items-center justify-between sm:hover:bg-n-100 transition-colors duration-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               <h4 className="text-body-base font-display font-bold text-navy flex-1">
                 {item.question}

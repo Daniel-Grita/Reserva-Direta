@@ -1,10 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import Script from 'next/script';
 import Link from 'next/link';
 import { aboutPage, contactCTA } from '@/lib/constants';
 import { useInView } from '@/lib/useInView';
 import { withNoBreak } from '@/lib/highlight';
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, options: {
+        sitekey: string;
+        callback: (token: string) => void;
+        'expired-callback'?: () => void;
+        'error-callback'?: () => void;
+      }) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+    };
+  }
+}
 
 const inputClasses =
   'w-full px-4 py-3 bg-n-150 rounded-input text-body-base font-body text-n-900 placeholder:text-n-400 focus:outline-none focus:ring-2 focus:ring-orange/50 transition-all duration-base';
@@ -40,7 +56,32 @@ export default function ContactCTA() {
   });
   const [honeypot, setHoneypot] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [captchaLoaded, setCaptchaLoaded] = useState(false);
+  const captchaRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string>('');
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [ref, inView] = useInView<HTMLElement>();
+
+  const handleScriptLoad = useCallback(() => {
+    setCaptchaLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!captchaLoaded || !captchaRef.current || !window.turnstile) return;
+    widgetIdRef.current = window.turnstile.render(captchaRef.current, {
+      sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
+      callback: (token) => setCaptchaToken(token),
+      'expired-callback': () => setCaptchaToken(''),
+      'error-callback': () => setCaptchaToken(''),
+    });
+    const id = widgetIdRef.current;
+    return () => {
+      if (id && window.turnstile) window.turnstile.remove(id);
+    };
+  }, [captchaLoaded]);
+
+  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -63,13 +104,22 @@ export default function ContactCTA() {
       const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, _gotcha: honeypot }),
+        body: JSON.stringify({
+          ...formData,
+          _gotcha: honeypot,
+          'cf-turnstile-response': captchaToken,
+        }),
       });
 
       if (response.ok) {
         setStatus('success');
         setFormData({ nome: '', telemovel: '', email: '', comentario: '' });
-        setTimeout(() => setStatus('idle'), 5000);
+        setCaptchaToken('');
+        if (widgetIdRef.current && window.turnstile) {
+          window.turnstile.reset(widgetIdRef.current);
+        }
+        if (timerRef.current) clearTimeout(timerRef.current);
+        timerRef.current = setTimeout(() => setStatus('idle'), 5000);
       } else {
         // Error persists until next submit so the mailto fallback stays readable.
         setStatus('error');
@@ -83,7 +133,7 @@ export default function ContactCTA() {
     <section ref={ref} data-reveal={inView} id="contacto" className="bg-navy py-section-y-lg">
       <div className="section-container max-w-2xl">
         <div className="reveal-stagger">
-          <div className="text-center mb-10">
+          <div className="sm:text-center mb-10">
             <h2 className="text-display-md lg:text-display-lg font-display text-white mb-4 text-balance">
               {contactCTA.heading}
             </h2>
@@ -202,15 +252,22 @@ export default function ContactCTA() {
                 )}
               </div>
 
+              <div ref={captchaRef} className="flex justify-center" />
+              <Script
+                src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                strategy="lazyOnload"
+                onLoad={handleScriptLoad}
+              />
+
               <button
                 type="submit"
-                disabled={status === 'loading'}
+                disabled={status === 'loading' || (captchaLoaded && !captchaToken)}
                 className="w-full bg-orange text-white text-button font-body font-bold py-4 rounded-btn hover:opacity-90 active:scale-[0.99] transition-all duration-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-navy"
               >
                 {status === 'loading' ? 'A enviar...' : contactCTA.submit}
               </button>
 
-              <p className="text-caption font-body text-n-400 text-center">
+              <p className="text-caption font-body text-n-400 sm:text-center">
                 {contactCTA.consent}{' '}
                 <Link
                   href="/politica-privacidade"
@@ -223,7 +280,7 @@ export default function ContactCTA() {
             </form>
           </div>
 
-          <p className="text-body-sm font-body text-white/60 text-center mt-6">
+          <p className="text-body-sm font-body text-white/60 sm:text-center mt-6">
             {contactCTA.fine_print}
           </p>
         </div>
@@ -236,7 +293,7 @@ function FoundersIntro() {
   const founders = aboutPage.team.members;
   const firstNames = founders.map((m) => m.name.split(' ')[0]).join(' e ');
   return (
-    <div className="mb-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 border-b border-white/15 pb-8">
+    <div className="mb-8 flex flex-col sm:flex-row items-start sm:items-center sm:justify-center gap-5 sm:gap-6 border-b border-white/15 pb-8">
       <div className="flex -space-x-3 shrink-0">
         {founders.map((m) => (
           // eslint-disable-next-line @next/next/no-img-element
@@ -249,7 +306,7 @@ function FoundersIntro() {
           />
         ))}
       </div>
-      <div className="text-center sm:text-left flex-1">
+      <div className="text-left">
         <p className="text-body-sm font-body text-white">
           <span className="font-bold">{firstNames}</span> respondem pessoalmente em 24 horas.
         </p>

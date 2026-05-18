@@ -87,14 +87,14 @@ export const aboutPage = {
 };
 
 export const hero = {
-  heading: "Aumente as suas\nreservas diretas.",
+  heading: "Aumente as\nsuas reservas diretas.",
   headingSecondary: "Reduza comissões.",
   subtitle:
-    "Ajudamos alojamentos em Portugal a libertar-se da dependência\ndas OTAs e a aumentar receita através de reservas diretas,\ncom tecnologia, branding e marketing feitos à medida.",
+    "Ajudamos alojamentos em Portugal a libertar-se da dependência das OTAs e a aumentar receita através de reservas diretas, com tecnologia, branding e marketing feitos à medida.",
   cta1: { label: "Fale Connosco", href: "#contacto" },
-  cta2: { label: "Ver Como Funciona", href: "#como-funciona" },
+  cta2: { label: "Ver Como Funciona", labelMobile: "Como Funciona?", href: "#como-funciona" },
   mockupNote:
-    "Quarto de alojamento boutique português com luz natural — exemplo de propriedade que aumentou reservas diretas com a Reserva Direta",
+    "Quarto de alojamento boutique português com luz natural, exemplo de propriedade que aumentou reservas diretas com a Reserva Direta",
 };
 
 export const problem = {
@@ -432,7 +432,7 @@ export const serviceDetails = {
     eyebrow: "CONSULTORIA E FIDELIZAÇÃO",
     heading: "Estadias únicas em hóspedes que voltam",
     intro:
-      "Criamos estratégias de fidelização e comunicação pós-estadia para transformar reservas únicas em clientes recorrentes.",
+      "Criamos estratégias de fidelização e comunicação pós-estadia para transformar\nreservas únicas em clientes recorrentes.",
     included: {
       heading: "O que está incluído",
       items: [
@@ -612,7 +612,7 @@ export const useCasesPage = {
     intro:
       "Quando um hóspede pesquisa no Google, o seu website oficial aparece sempre com o melhor preço. É assim que fica a sua propriedade.",
     callout:
-      "A reserva direta é sempre o melhor preço para o seu hóspede. Quando pesquisam no Google, veem o seu website ao lado das OTAs — e o seu preço ganha. É isto que configuramos para cada propriedade com quem trabalhamos.",
+      "A reserva direta é sempre o melhor preço para o seu hóspede. Quando pesquisam no Google, veem o seu website ao lado das OTAs e o seu preço ganha. É isto que configuramos para cada propriedade com quem trabalhamos.",
   },
   booking: {
     label: "MOTOR DE RESERVAS",
@@ -620,7 +620,7 @@ export const useCasesPage = {
     intro:
       "Cada propriedade tem o seu próprio motor de reservas com a sua imagem, integrado diretamente no website. Sem redirecionamentos, sem plataformas de terceiros.",
     callout:
-      "Cada motor de reservas é personalizado à imagem da propriedade. Cores, logo e tipos de quarto diferentes — construído em 1 a 2 semanas e integrado diretamente no website existente.",
+      "Cada motor de reservas é personalizado à imagem da propriedade. Cores, logo e tipos de quarto diferentes, construído em 1 a 2 semanas e integrado diretamente no website existente.",
   },
 };
 

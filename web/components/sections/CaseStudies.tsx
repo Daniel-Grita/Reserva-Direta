@@ -4,7 +4,6 @@ import { caseStudies } from '@/lib/constants';
 import SectionHeader from '../ui/SectionHeader';
 import { LinkButton } from '../ui/Button';
 import { useInView } from '@/lib/useInView';
-import { withHighlight } from '@/lib/highlight';
 
 export default function CaseStudies() {
   const [ref, inView] = useInView<HTMLElement>();
@@ -16,7 +15,7 @@ export default function CaseStudies() {
           <SectionHeader
             label={caseStudies.label}
             heading={caseStudies.heading}
-            intro={<>{withHighlight(caseStudies.intro.split('. ')[0] + '.', 'por todo o país')}<br />{'Aqui estão alguns exemplos do que implementámos.'}</>}
+            intro={<>Trabalhamos com propriedades de diferentes dimensões por todo o país.<br />Aqui estão alguns exemplos do que implementámos.</>}
           />
         </div>
 
@@ -24,7 +23,7 @@ export default function CaseStudies() {
           {caseStudies.cases.map((caseItem) => (
             <article
               key={caseItem.title}
-              className="group bg-white rounded-card overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-slow flex flex-col"
+              className="group bg-white rounded-card overflow-hidden shadow-card sm:hover:shadow-card-hover sm:hover:-translate-y-1 sm:hover:scale-[1.02] transition-[transform,box-shadow] duration-slow ease-in-out flex flex-col"
             >
               <div className="relative aspect-[4/3] bg-n-200 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -33,9 +32,9 @@ export default function CaseStudies() {
                   alt={caseItem.title}
                   loading="lazy"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="w-full h-full object-cover transition-transform duration-slow group-hover:scale-[1.03]"
+                  className="w-full h-full object-cover transition-transform duration-slow sm:group-hover:scale-[1.03]"
                 />
-                <span className="absolute top-3 left-3 inline-flex items-center bg-white/95 backdrop-blur-sm text-navy text-label font-body font-bold uppercase tracking-label px-3 py-1.5 rounded-full">
+                <span className="absolute top-3 left-3 inline-flex items-center bg-white/95 backdrop-blur-sm text-navy text-label font-body font-bold uppercase tracking-label px-3 py-1.5 rounded-card">
                   {caseItem.category}
                 </span>
               </div>
