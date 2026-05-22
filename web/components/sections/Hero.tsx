@@ -28,7 +28,7 @@ const floatingImages = [
 
 export default function Hero() {
   return (
-    <section className="relative sm:h-[88vh] sm:min-h-[640px] min-[1440px]:overflow-hidden bg-light-blue sm:flex sm:flex-col sm:justify-center sm:pt-[72px]">
+    <section className="relative sm:min-h-[max(640px,88vh)] min-[1440px]:overflow-hidden bg-light-blue sm:flex sm:flex-col sm:pt-[72px] min-[1440px]:justify-center">
       <span
         aria-hidden
         className="hero-blob-a pointer-events-none absolute -top-32 -left-24 w-[36rem] h-[36rem] rounded-full bg-orange/8 blur-3xl"
@@ -49,7 +49,7 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="relative flex flex-col items-center gap-8 sm:gap-10 px-6 sm:px-8 md:px-16 lg:px-section-x pt-[80px] pb-10 sm:pt-0 sm:pb-0">
+      <div className="relative flex flex-col items-center gap-8 sm:gap-10 px-6 sm:px-8 md:px-16 lg:px-section-x pt-[80px] pb-10 sm:pt-10 sm:pb-16 min-[1440px]:pt-0 min-[1440px]:pb-0">
         <div className="hero-stagger max-w-3xl text-left sm:text-center space-y-6">
           <h1 className="text-display-md lg:text-display-lg font-display text-navy">
             <span className="block whitespace-pre-line">{hero.heading}</span>

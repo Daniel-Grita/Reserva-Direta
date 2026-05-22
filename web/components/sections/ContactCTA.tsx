@@ -28,6 +28,7 @@ const inputClasses =
 const labelClasses = 'block text-body-sm font-body font-bold text-navy mb-2';
 
 const FALLBACK_EMAIL = 'agenciareservadireta@gmail.com';
+const TURNSTILE_SITEKEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 function formatPhone(input: string): string {
   const digits = input.replace(/\D/g, '');
@@ -68,13 +69,18 @@ export default function ContactCTA() {
   }, []);
 
   useEffect(() => {
-    if (!captchaLoaded || !captchaRef.current || !window.turnstile) return;
-    widgetIdRef.current = window.turnstile.render(captchaRef.current, {
-      sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
-      callback: (token) => setCaptchaToken(token),
-      'expired-callback': () => setCaptchaToken(''),
-      'error-callback': () => setCaptchaToken(''),
-    });
+    if (!TURNSTILE_SITEKEY || !captchaLoaded || !captchaRef.current || !window.turnstile) return;
+    try {
+      widgetIdRef.current = window.turnstile.render(captchaRef.current, {
+        sitekey: TURNSTILE_SITEKEY,
+        callback: (token) => setCaptchaToken(token),
+        'expired-callback': () => setCaptchaToken(''),
+        'error-callback': () => setCaptchaToken(''),
+      });
+    } catch (err) {
+      console.warn('Turnstile render failed:', err);
+      return;
+    }
     const id = widgetIdRef.current;
     return () => {
       if (id && window.turnstile) window.turnstile.remove(id);
@@ -253,15 +259,17 @@ export default function ContactCTA() {
               </div>
 
               <div ref={captchaRef} className="flex justify-center" />
-              <Script
-                src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-                strategy="lazyOnload"
-                onLoad={handleScriptLoad}
-              />
+              {TURNSTILE_SITEKEY && (
+                <Script
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  strategy="lazyOnload"
+                  onLoad={handleScriptLoad}
+                />
+              )}
 
               <button
                 type="submit"
-                disabled={status === 'loading' || (captchaLoaded && !captchaToken)}
+                disabled={status === 'loading' || (!!TURNSTILE_SITEKEY && captchaLoaded && !captchaToken)}
                 className="w-full bg-orange text-white text-button font-body font-bold py-4 rounded-btn hover:opacity-90 active:scale-[0.99] transition-all duration-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-navy"
               >
                 {status === 'loading' ? 'A enviar...' : contactCTA.submit}
